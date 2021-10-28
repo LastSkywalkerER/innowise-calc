@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const {
   CleanWebpackPlugin
@@ -53,7 +55,6 @@ module.exports = {
     open: 'D:\\Program Files\\Mozilla Firefox\\firefox.exe',
     port: 8080,
     hot: true,
-    writeToDisk: false,
   },
   module: {
     rules: [{
