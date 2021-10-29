@@ -1,17 +1,15 @@
-"use strict";
-
-import { renderButtons } from "./renderButtons";
-import { command } from "./command";
+import renderButtons from "./renderButtons";
+import command from "./command";
 
 import "./style.sass";
 
-const calculator = document.getElementById("calculator"),
-  input = calculator.querySelector(".text-field__input"),
-  buttons = calculator.querySelector(".calculator-buttons"),
-  buttonsHardBlock = buttons.querySelector(".calculator-buttons_hard"),
-  buttonsSimpleUpBlock = buttons.querySelector(".simple--up"),
-  buttonsSimpleRightBlock = buttons.querySelector(".simple--right"),
-  buttonsNumbersBlock = buttons.querySelector(".numbers");
+const calculator = document.getElementById("calculator");
+const input = calculator.querySelector(".text-field__input");
+const buttons = calculator.querySelector(".calculator-buttons");
+const buttonsHardBlock = buttons.querySelector(".calculator-buttons_hard");
+const buttonsSimpleUpBlock = buttons.querySelector(".simple--up");
+const buttonsSimpleRightBlock = buttons.querySelector(".simple--right");
+const buttonsNumbersBlock = buttons.querySelector(".numbers");
 
 renderButtons(
   buttonsHardBlock,

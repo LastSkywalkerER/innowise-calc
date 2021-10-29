@@ -1,32 +1,29 @@
-'use strict';
-
 import {
   buttonsHard,
   buttonsSimpleUp,
   buttonsSimpleRight,
   buttonsNumbers,
-} from './buttonNames';
+} from "./buttonNames";
 
 const renderButton = (name, place) => {
-  const button = document.createElement('button');
-  button.classList.add('button');
+  const button = document.createElement("button");
+  button.classList.add("button");
 
-  if (name === '0') {
-    button.classList.add('zero');
+  if (name === "0") {
+    button.classList.add("zero");
   }
 
   button.innerText = name;
-  button.setAttribute('calcAct', name);
+  button.setAttribute("calcAct", name);
   place.append(button);
 };
 
-export const renderButtons = (
+export default (
   buttonsHardBlock,
   buttonsSimpleUpBlock,
   buttonsSimpleRightBlock,
-  buttonsNumbersBlock) => {
-
-
+  buttonsNumbersBlock
+) => {
   buttonsHard.forEach((name) => {
     renderButton(name, buttonsHardBlock);
   });

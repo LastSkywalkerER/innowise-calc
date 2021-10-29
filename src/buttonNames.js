@@ -25,46 +25,46 @@ const buttonNames = {
 };
 
 const buttonsHard = [
-    buttonNames.mc,
-    buttonNames.mPlus,
-    buttonNames.mMinus,
-    buttonNames.mr,
-    buttonNames.x2,
-    buttonNames.x3,
-    buttonNames.xy,
-    buttonNames.ex,
-    buttonNames.tenInX,
-    buttonNames.oneDevX,
-    buttonNames.twoInX,
-    buttonNames.threeInX,
-    buttonNames.yInX,
-    buttonNames.xFact,
-  ],
-  buttonsSimpleUp = [
-    buttonNames.reset,
-    buttonNames.plusMinus,
-    buttonNames.percent,
-  ],
-  buttonsSimpleRight = [
-    buttonNames.dev,
-    buttonNames.mult,
-    buttonNames.minus,
-    buttonNames.plus,
-    buttonNames.eq,
-  ],
-  buttonsNumbers = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0",
-    buttonNames.dot,
-  ];
+  buttonNames.mc,
+  buttonNames.mPlus,
+  buttonNames.mMinus,
+  buttonNames.mr,
+  buttonNames.x2,
+  buttonNames.x3,
+  buttonNames.xy,
+  buttonNames.ex,
+  buttonNames.tenInX,
+  buttonNames.oneDevX,
+  buttonNames.twoInX,
+  buttonNames.threeInX,
+  buttonNames.yInX,
+  buttonNames.xFact,
+];
+const buttonsSimpleUp = [
+  buttonNames.reset,
+  buttonNames.plusMinus,
+  buttonNames.percent,
+];
+const buttonsSimpleRight = [
+  buttonNames.dev,
+  buttonNames.mult,
+  buttonNames.minus,
+  buttonNames.plus,
+  buttonNames.eq,
+];
+const buttonsNumbers = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  buttonNames.dot,
+];
 
 export {
   buttonsHard,

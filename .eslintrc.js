@@ -1,12 +1,17 @@
-export default {
+module.exports = {
   env: {
     browser: true,
     es2021: true,
   },
   extends: ["airbnb-base"],
   parserOptions: {
-    ecmaVersion: 13,
+    ecmaVersion: 2021,
     sourceType: "module",
   },
-  rules: {},
+  ignorePatterns: [".eslintrc.js", "**/vendor/*.js"],
+  rules: {
+    "linebreak-style": 0,
+    "eol-last": 0,
+    "operator-linebreak": 0,
+  },
 };
