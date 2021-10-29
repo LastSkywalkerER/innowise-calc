@@ -1,5 +1,12 @@
 'use strict';
 
+import {
+  renderButtons
+} from './renderButtons';
+import {
+  command
+} from './command';
+
 import './style.sass';
 
 const calculator = document.getElementById('calculator'),
@@ -10,31 +17,20 @@ const calculator = document.getElementById('calculator'),
   buttonsSimpleRightBlock = buttons.querySelector('.simple--right'),
   buttonsNumbersBlock = buttons.querySelector('.numbers');
 
-const renderButton = (name, place) => {
-  const button = document.createElement('button');
-  button.classList.add('button');
-  button.innerText = name;
-  place.append(button);
-};
+renderButtons(buttonsHardBlock,
+  buttonsSimpleUpBlock,
+  buttonsSimpleRightBlock,
+  buttonsNumbersBlock);
 
-const renderButtons = () => {
-  const buttonsHard = ['mc', 'm+', 'm-', 'mr', 'x2', 'x3', 'xy', 'ex', '10x', '1/x', '2x', '3x', 'yx', 'x!'],
-    buttonsSimpleUp = ['AC', '+/-', '%'],
-    buttonsSimpleRight = ['/', '*', '-', '+', '='],
-    buttonsNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
+buttons.addEventListener('click', event => {
+  command(event, input);
+});
 
-  buttonsHard.forEach((name) => {
-    renderButton(name, buttonsHardBlock);
-  });
-  buttonsSimpleUp.forEach((name) => {
-    renderButton(name, buttonsSimpleUpBlock);
-  });
-  buttonsSimpleRight.forEach((name) => {
-    renderButton(name, buttonsSimpleRightBlock);
-  });
-  buttonsNumbers.forEach((name) => {
-    renderButton(name, buttonsNumbersBlock);
-  });
-};
-
-renderButtons();
+buttons.addEventListener('mousedown', event => {
+  if (event.target.hasAttribute('calcAct')) {
+    event.target.classList.add('clicked-button');
+    setTimeout(() => {
+      event.target.classList.remove('clicked-button');
+    }, 300);
+  }
+});
