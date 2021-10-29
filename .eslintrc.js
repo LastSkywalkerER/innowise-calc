@@ -1,17 +1,12 @@
-'use sttrict';
-
 export default {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": ["eslint:recommended", "prettier"],
-    "parserOptions": {
-        "ecmaVersion": 16,
-        "sourceType": "module"
-    },
-    "rules": {},
-    "plugins": [
-        "prettier"
-    ]
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: ["airbnb-base"],
+  parserOptions: {
+    ecmaVersion: 13,
+    sourceType: "module",
+  },
+  rules: {},
 };

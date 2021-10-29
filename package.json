@@ -10,11 +10,13 @@
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.0",
-    "eslint": "^8.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "jest": "^27.3.1",
     "lint-staged": "^11.2.6",
     "mini-css-extract-plugin": "^2.4.3",
@@ -27,8 +29,7 @@
     "webpack-dev-server": "^4.4.0"
   },
   "lint-staged": {
-    "*.{js}": [
-      "node_modules/.bin/eslint --max-warnings=0",
+    "*.js": [
       "prettier --write",
       "git add"
     ]
@@ -36,7 +37,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack serve --mode development",
-    "precommit": "lint-staged"
+    "pre-commit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
   },
   "homepage": "https://github.com/LastSkywalkerER/innowise-calc#readme",
   "dependencies": {
+    "eslint-config-airbnb": "^18.2.1",
     "jshint": "^2.13.1",
     "npm-check-updates": "^11.8.5"
   }
