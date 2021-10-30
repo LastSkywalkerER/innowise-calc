@@ -29,8 +29,26 @@ buttons.addEventListener('click', (event) => {
 });
 
 document.addEventListener('keydown', (event) => {
+  // eslint-disable-next-line prefer-destructuring
+  let key = event.key;
+
+  switch (key) {
+    case 'Delete':
+      key = 'AC';
+      break;
+    case 'Enter':
+      key = '=';
+      break;
+    default:
+      break;
+  }
   try {
-    command.execute(event.key);
+    command.execute(key);
+    const button = buttons.querySelector(`[calcAct="${key}"]`);
+    button.classList.add('clicked-button');
+    setTimeout(() => {
+      button.classList.remove('clicked-button');
+    }, 300);
     // eslint-disable-next-line no-empty
   } catch (e) {
 
