@@ -4,8 +4,7 @@ export default class Command {
     this.actionList = actionList;
   }
 
-  execute(event) {
-    const text = event.target.getAttribute('calcAct');
+  execute(text) {
     const action = Object.keys(this.actionList).reduce((previousValue, currentValue) => {
       if (this.actionList[currentValue] === text) {
         return currentValue;

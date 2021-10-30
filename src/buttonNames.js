@@ -32,6 +32,8 @@ const buttonNames = {
   nine: '9',
   zero: '0',
   dot: '.',
+  delete: 'Delete',
+  enter: 'Enter',
 };
 
 const buttonsHard = [

@@ -38,6 +38,10 @@ export default class СalcMath {
     this.input.value = '';
   }
 
+  delete() {
+    this.reset();
+  }
+
   eq() {
     const {
       value,
@@ -47,6 +51,10 @@ export default class СalcMath {
     this.operand2 = +value.slice(value.indexOf(this.operator) + 1);
 
     this[this.action]();
+  }
+
+  enter() {
+    this.eq();
   }
 
   one(text) {

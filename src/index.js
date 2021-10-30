@@ -25,7 +25,16 @@ renderButtons(
 );
 
 buttons.addEventListener('click', (event) => {
-  command.execute(event);
+  command.execute(event.target.getAttribute('calcAct'));
+});
+
+document.addEventListener('keydown', (event) => {
+  try {
+    command.execute(event.key);
+    // eslint-disable-next-line no-empty
+  } catch (e) {
+
+  }
 });
 
 buttons.addEventListener('mousedown', (event) => {
