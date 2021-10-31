@@ -1,9 +1,9 @@
-import renderButtons from './renderButtons';
-import Command from './Command';
-import СalcMath from './CalcMath';
+import renderButtons from './modules/renderButtons';
+import Command from './modules/Command';
+import СalcMath from './modules/CalcMath';
 import {
   buttonNames,
-} from './buttonNames';
+} from './modules/buttonNames';
 
 import './style.sass';
 
