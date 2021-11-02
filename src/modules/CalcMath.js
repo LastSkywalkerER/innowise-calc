@@ -1,22 +1,38 @@
 export default class СalcMath {
   constructor(input) {
     this.operator = '';
-    this.action = '';
+    this.command = null;
     this.operand1 = 0;
     this.operand2 = 0;
     this.input = input;
     this.dotFlag = false;
     this.actionFlag = false;
+    this.errorOccured = false;
+  }
+
+  renderError(e) {
+    this.errorOccured = true;
+    this.reset();
+    this.input.value = e;
+  }
+
+  errorReset() {
+    if (this.errorOccured) {
+      this.errorOccured = false;
+      this.reset();
+    }
   }
 
   render(value) {
+    this.errorReset();
     this.input.value += value;
   }
 
-  renderAction(value, action) {
+  renderAction(value, Command) {
+    this.errorReset();
     if (!this.actionFlag) {
-      this.action = `${action}Handler`;
       this.dotFlag = false;
+      this.command = new Command(this);
       this.operator = value;
       this.actionFlag = true;
       this.render(value);
@@ -24,6 +40,7 @@ export default class СalcMath {
   }
 
   renderAnswer(value) {
+    this.errorReset();
     this.reset();
     this.operand1 = value;
     this.input.value = value;
@@ -38,101 +55,18 @@ export default class СalcMath {
     this.input.value = '';
   }
 
-  eq() {
-    const {
-      value,
-    } = this.input;
+  submit() {
+    this.errorReset();
+    // eslint-disable-next-line prefer-destructuring
+    const value = this.input.value;
 
-    this.operand1 = +value.slice(0, value.indexOf(this.operator));
-    this.operand2 = +value.slice(value.indexOf(this.operator) + 1);
-
-    this[this.action]();
-  }
-
-  one(text) {
-    this.render(text);
-  }
-
-  two(text) {
-    this.render(text);
-  }
-
-  three(text) {
-    this.render(text);
-  }
-
-  four(text) {
-    this.render(text);
-  }
-
-  five(text) {
-    this.render(text);
-  }
-
-  six(text) {
-    this.render(text);
-  }
-
-  seven(text) {
-    this.render(text);
-  }
-
-  eight(text) {
-    this.render(text);
-  }
-
-  nine(text) {
-    this.render(text);
-  }
-
-  zero(text) {
-    this.render(text);
-  }
-
-  dot(text) {
-    if (!this.dotFlag) {
-      this.dotFlag = true;
-      this.render(text);
+    if (!this.operand1) {
+      this.operand1 = +value.slice(0, value.indexOf(this.operator));
     }
-  }
-
-  dev(text, action) {
-    this.renderAction(text, action);
-  }
-
-  devHandler() {
-    try {
-      if (this.operand2 === 0) {
-        throw Error('try to devide on zero');
-      }
-      this.renderAnswer(this.operand1 / this.operand2);
-    } catch (e) {
-      this.reset();
-      this.render(e);
+    if (!this.operand2) {
+      this.operand2 = +value.slice(value.indexOf(this.operator) + this.operator.length);
     }
-  }
 
-  mult(text, action) {
-    this.renderAction(text, action);
-  }
-
-  multHandler() {
-    this.renderAnswer(this.operand1 * this.operand2);
-  }
-
-  minus(text, action) {
-    this.renderAction(text, action);
-  }
-
-  minusHandler() {
-    this.renderAnswer(this.operand1 - this.operand2);
-  }
-
-  plus(text, action) {
-    this.renderAction(text, action);
-  }
-
-  plusHandler() {
-    this.renderAnswer(this.operand1 + this.operand2);
+    this.command.execute();
   }
 }

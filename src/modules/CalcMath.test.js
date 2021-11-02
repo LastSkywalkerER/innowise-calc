@@ -5,7 +5,7 @@ import {
   afterEach,
 } from '@jest/globals';
 import СalcMath from './CalcMath';
-import Command from './Command';
+import Command from './Commands/ButtonsCommand';
 import {
   buttonNames,
 } from './buttonNames';

@@ -1,5 +1,5 @@
 import renderButtons from './modules/renderButtons';
-import Command from './modules/Command';
+import Command from './modules/Commands/ButtonsCommand';
 import СalcMath from './modules/CalcMath';
 import {
   buttonNames,
@@ -25,7 +25,9 @@ renderButtons(
 );
 
 buttons.addEventListener('click', (event) => {
-  command.execute(event.target.getAttribute('calcAct'));
+  if (event.target.hasAttribute('calcAct')) {
+    command.execute(event.target.getAttribute('calcAct'));
+  }
 });
 
 document.addEventListener('keydown', (event) => {
