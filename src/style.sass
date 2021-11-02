@@ -1,6 +1,9 @@
 :root
   --shadow-color: rgba(0, 0, 0, 0.15)
   --button-color: #00000018
+  --number-button-color: #ffffff41
+  --right-button-color: #ffc40018
+  --top-button-color: #ff000018
   --clicked-button-color: #00000056
 
 body
@@ -74,6 +77,12 @@ input[type="text"]
         display: grid
         grid-auto-flow: row
         grid-row-gap: 5px
+        & .numbers
+          & .button
+            background: var(--number-button-color)
+        & .simple--up
+          & .button
+            background: var(--top-button-color)
       & .simple--up, & .numbers
         display: grid
         grid-template-columns: repeat(3, 1fr)
@@ -84,6 +93,8 @@ input[type="text"]
         grid-template-columns: 1fr
         grid-row-gap: 5px
         column-gap: 5px
+        & .button
+          background: var(--right-button-color)
       & .zero
         grid-column: auto / span 2
 

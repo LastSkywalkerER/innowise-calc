@@ -10,4 +10,8 @@ export default class Command {
   execute() {
     throw new Error(`Method execute() not implemented in ${this.constructor.name}`);
   }
+
+  undo() {
+    throw new Error(`Method undo() not implemented in ${this.constructor.name}`);
+  }
 }

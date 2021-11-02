@@ -1,13 +1,39 @@
+/* eslint-disable prefer-destructuring */
 export default class СalcMath {
   constructor(input) {
     this.operator = '';
-    this.command = null;
+    this.commands = [];
     this.operand1 = 0;
     this.operand2 = 0;
     this.input = input;
     this.dotFlag = false;
     this.actionFlag = false;
     this.errorOccured = false;
+    this.memory = 0;
+  }
+
+  getOperands() {
+    const value = this.input.value;
+    const checkMinus = (string) => (string.slice(0, 1) !== '-' ? +string : -string.slice(1, string.length));
+    let operatorPosition = value.indexOf(this.operator);
+
+    if (this.operator && operatorPosition > 0) {
+      this.operand2 = checkMinus(value.slice(value.indexOf(this.operator) + this.operator.length));
+    } else {
+      operatorPosition = value.length;
+    }
+    this.operand1 = checkMinus(value.slice(0, operatorPosition));
+  }
+
+  setOperands(setValue1 = '', setValue2 = '') {
+    if (!Number.isNaN(setValue1)) {
+      this.operand1 = setValue1;
+    }
+    if (!Number.isNaN(setValue2)) {
+      this.operand2 = setValue2;
+    }
+
+    this.input.value = `${this.operand1}${this.operator}${this.operand2}`;
   }
 
   renderError(e) {
@@ -30,11 +56,14 @@ export default class СalcMath {
 
   renderAction(value, Command) {
     this.errorReset();
+
     if (!this.actionFlag) {
-      this.dotFlag = false;
-      this.command = new Command(this);
-      this.operator = value;
-      this.actionFlag = true;
+      if (this.input.value !== '') {
+        this.dotFlag = false;
+        this.commands.push(new Command(this));
+        this.operator = value;
+        this.actionFlag = true;
+      }
       this.render(value);
     }
   }
@@ -57,16 +86,13 @@ export default class СalcMath {
 
   submit() {
     this.errorReset();
-    // eslint-disable-next-line prefer-destructuring
-    const value = this.input.value;
-
-    if (!this.operand1) {
-      this.operand1 = +value.slice(0, value.indexOf(this.operator));
+    this.getOperands();
+    if (this.operator) {
+      this.commands[this.commands.length - 1].execute();
     }
-    if (!this.operand2) {
-      this.operand2 = +value.slice(value.indexOf(this.operator) + this.operator.length);
-    }
+  }
 
-    this.command.execute();
+  toggleMinus() {
+    this.input.value = (this.input.value.slice(0, 1) !== '-' ? `-${this.input.value}` : this.input.value.slice(1, this.input.value.length));
   }
 }

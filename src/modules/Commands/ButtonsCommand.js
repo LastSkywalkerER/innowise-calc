@@ -12,6 +12,9 @@ export default class ButtonsCommand extends Command {
 
   commandExecute(SomeCommand, text) {
     const command = new SomeCommand(this.subject);
+    if (text !== this.buttonList.reset.name && text !== this.buttonList.eq.name) {
+      this.subject.commands.push(command);
+    }
     command.execute(text);
   }
 
@@ -34,13 +37,23 @@ export default class ButtonsCommand extends Command {
 
     if (buttonsSimpleRight.includes(text)) {
       if (text === this.buttonList.eq.name) {
-        this.commandExecute(this.buttonList[button].Command);
+        this.commandExecute(this.buttonList[button].Command, text);
         return;
       }
       this.subject.renderAction(text, this.buttonList[button].Command);
       return;
     }
 
-    this.commandExecute(this.buttonList[button].Command);
+    if (text === this.buttonList.xy.name) {
+      this.subject.renderAction('^', this.buttonList[button].Command);
+      return;
+    }
+
+    if (text === this.buttonList.yRoot.name) {
+      this.subject.renderAction('√', this.buttonList[button].Command);
+      return;
+    }
+
+    this.commandExecute(this.buttonList[button].Command, text);
   }
 }

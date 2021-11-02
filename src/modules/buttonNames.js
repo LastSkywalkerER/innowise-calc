@@ -5,63 +5,79 @@ import DevCommand from './Commands/DevCommand';
 import MultCommand from './Commands/MultCommand';
 import MinusCommand from './Commands/MinusCommand';
 import PlusCommand from './Commands/PlusCommand';
+import PlusMinusCommand from './Commands/PlusMinusCommand';
+import PercentCommand from './Commands/PercentCommand';
+import XSquareCommand from './Commands/XSquareCommand';
+import XCubeCommand from './Commands/XCubeCommand';
+import XInYCommand from './Commands/XInYCommand';
+import EInxCommand from './Commands/EInxCommand';
+import TenInXCommand from './Commands/TenInXCommand';
+import OneDevXCommand from './Commands/OneDevXCommand';
+import SquareRootCommand from './Commands/SquareRootCommand';
+import CubeRootCommand from './Commands/CubeRootCommand';
+import YRootCommand from './Commands/YRootCommand';
+import XFactCommand from './Commands/XFactCommand';
+import MCCommand from './Commands/MCCommand';
+import MMinusCommand from './Commands/MMinusCommand';
+import MPlusCommand from './Commands/MPlusCommand';
+import MRCommand from './Commands/MRCommand';
 
 const buttonNames = {
   mc: {
     name: 'mc',
-    Command: null,
+    Command: MCCommand,
   },
   mPlus: {
     name: 'm+',
-    Command: null,
+    Command: MPlusCommand,
   },
   mMinus: {
     name: 'm-',
-    Command: null,
+    Command: MMinusCommand,
   },
   mr: {
     name: 'mr',
-    Command: null,
+    Command: MRCommand,
   },
-  x2: {
+  xSquare: {
     name: 'x²',
-    Command: null,
+    Command: XSquareCommand,
   },
-  x3: {
+  xCube: {
     name: 'x³',
-    Command: null,
+    Command: XCubeCommand,
   },
   xy: {
     name: 'xʸ',
-    Command: null,
+    Command: XInYCommand,
   },
   ex: {
     name: 'eˣ',
-    Command: null,
+    Command: EInxCommand,
   },
   tenInX: {
     name: '10ˣ',
-    Command: null,
+    Command: TenInXCommand,
   },
   oneDevX: {
-    name: 'm+',
-    Command: null,
+    name: '1/x',
+    Command: OneDevXCommand,
   },
   squareRoot: {
     name: '√',
-    Command: null,
+    Command: SquareRootCommand,
   },
   cubeRoot: {
     name: '³√',
-    Command: null,
+    Command: CubeRootCommand,
   },
   yRoot: {
     name: 'ʸ√',
-    Command: null,
+    Command: YRootCommand,
   },
   xFact: {
     name: 'x!',
-    Command: null,
+    Command: XFactCommand,
   },
   reset: {
     name: 'AC',
@@ -69,11 +85,11 @@ const buttonNames = {
   },
   plusMinus: {
     name: '+/-',
-    Command: null,
+    Command: PlusMinusCommand,
   },
   percent: {
     name: '%',
-    Command: null,
+    Command: PercentCommand,
   },
   dev: {
     name: '/',
@@ -146,8 +162,8 @@ const buttonsHard = [
   buttonNames.mPlus.name,
   buttonNames.mMinus.name,
   buttonNames.mr.name,
-  buttonNames.x2.name,
-  buttonNames.x3.name,
+  buttonNames.xSquare.name,
+  buttonNames.xCube.name,
   buttonNames.xy.name,
   buttonNames.ex.name,
   buttonNames.tenInX.name,
