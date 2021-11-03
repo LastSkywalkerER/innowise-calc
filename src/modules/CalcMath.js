@@ -36,6 +36,10 @@ export default class СalcMath {
     this.input.value = `${this.operand1}${this.operator}${this.operand2}`;
   }
 
+  setMemory(value) {
+    this.memory += value;
+  }
+
   renderError(e) {
     this.errorOccured = true;
     this.reset();
@@ -57,7 +61,7 @@ export default class СalcMath {
   renderAction(value, Command) {
     this.errorReset();
 
-    if (!this.actionFlag) {
+    const initialSequence = () => {
       if (this.input.value !== '') {
         this.dotFlag = false;
         this.commands.push(new Command(this));
@@ -65,13 +69,28 @@ export default class СalcMath {
         this.actionFlag = true;
       }
       this.render(value);
+    };
+
+    if (this.actionFlag) {
+      this.submit();
+      initialSequence();
+    }
+    if (!this.actionFlag) {
+      initialSequence();
     }
   }
 
   renderAnswer(value) {
     this.errorReset();
-    this.reset();
+    this.operator = '';
     this.operand1 = value;
+    this.operand2 = 0;
+    if (!String(this.operand1).split('').includes('.')) {
+      this.dotFlag = false;
+    } else {
+      this.dotFlag = true;
+    }
+    this.actionFlag = false;
     this.input.value = value;
   }
 
@@ -82,6 +101,7 @@ export default class СalcMath {
     this.dotFlag = false;
     this.actionFlag = false;
     this.input.value = '';
+    this.memory = 0;
   }
 
   submit() {

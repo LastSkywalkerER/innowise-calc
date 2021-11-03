@@ -8,11 +8,21 @@ export default class ButtonsCommand extends Command {
   constructor(subject, buttonList) {
     super(subject);
     this.buttonList = buttonList;
+
+    this.nonHistory = [
+      this.buttonList.dot.name,
+      this.buttonList.reset.name,
+      this.buttonList.eq.name,
+      this.buttonList.mc.name,
+      this.buttonList.mPlus.name,
+      this.buttonList.mMinus.name,
+      this.buttonList.mr.name,
+    ];
   }
 
   commandExecute(SomeCommand, text) {
     const command = new SomeCommand(this.subject);
-    if (text !== this.buttonList.reset.name && text !== this.buttonList.eq.name) {
+    if (!this.nonHistory.includes(text)) {
       this.subject.commands.push(command);
     }
     command.execute(text);
@@ -27,21 +37,17 @@ export default class ButtonsCommand extends Command {
     }, '');
 
     if (buttonsNumbers.includes(text)) {
-      if (text === this.buttonList.dot.name) {
-        this.commandExecute(this.buttonList[button].Command, text);
+      if (text !== this.buttonList.dot.name) {
+        this.subject.render(text);
         return;
       }
-      this.subject.render(text);
-      return;
     }
 
     if (buttonsSimpleRight.includes(text)) {
-      if (text === this.buttonList.eq.name) {
-        this.commandExecute(this.buttonList[button].Command, text);
+      if (text !== this.buttonList.eq.name) {
+        this.subject.renderAction(text, this.buttonList[button].Command);
         return;
       }
-      this.subject.renderAction(text, this.buttonList[button].Command);
-      return;
     }
 
     if (text === this.buttonList.xy.name) {
