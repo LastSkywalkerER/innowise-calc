@@ -1,3 +1,4 @@
+import changeTheme from './modules/changeTheme';
 import renderButtons from './modules/renderButtons';
 import Command from './modules/Commands/ButtonsCommand';
 import СalcMath from './modules/CalcMath';
@@ -6,6 +7,7 @@ import {
 } from './modules/buttonNames';
 
 import './style.sass';
+import './checkbox.sass';
 
 const calculator = document.getElementById('calculator');
 const input = calculator.querySelector('.text-field__input');
@@ -16,6 +18,8 @@ const buttonsSimpleRightBlock = buttons.querySelector('.simple--right');
 const buttonsNumbersBlock = buttons.querySelector('.numbers');
 
 const command = new Command(new СalcMath(input), buttonNames);
+
+changeTheme();
 
 renderButtons(
   buttonsHardBlock,
