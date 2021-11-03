@@ -61,9 +61,7 @@ input[type="text"]
     padding: 10px
     border-radius: 5px
     box-shadow: 0 0 5px var(--shadow-color)
-  & .clicked-button
-    background: var(--clicked-button-color)
-    box-shadow: 0 0 5px var(--clicked-button-color)
+
   &-buttons
     display: grid
     grid-auto-flow: column
@@ -103,6 +101,9 @@ input[type="text"]
           background: var(--right-button-color)
       & .zero
         grid-column: auto / span 2
+    & .clicked-button
+      background: var(--clicked-button-color) !important
+      box-shadow: 0 0 5px var(--clicked-button-color) !important
 
 .text-field
   width: 100%
