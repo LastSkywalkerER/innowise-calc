@@ -94,7 +94,6 @@ export default class СalcMath {
     }
     if (!this.actionFlag) {
       initialSequence();
-      return;
     }
   }
 
