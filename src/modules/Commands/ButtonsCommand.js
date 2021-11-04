@@ -21,12 +21,14 @@ export default class ButtonsCommand extends Command {
       this.buttonList.mMinus.name,
       this.buttonList.mr.name,
       this.buttonList.unDo.name,
+      this.buttonList.plusMinus.name,
     ];
     this.nonSubmit = [
       this.buttonList.dot.name,
       this.buttonList.unDo.name,
       this.buttonList.percent.name,
       this.buttonList.oneDevX.name,
+      this.buttonList.plusMinus.name,
     ];
     this.resetableButtons = [
       this.buttonList.eq.name,
@@ -35,6 +37,7 @@ export default class ButtonsCommand extends Command {
       this.buttonList.xy.name,
       this.buttonList.ex.name,
       this.buttonList.tenInX.name,
+      this.buttonList.oneDevX.name,
       this.buttonList.squareRoot.name,
       this.buttonList.cubeRoot.name,
       this.buttonList.yRoot.name,

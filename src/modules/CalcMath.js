@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 export default class СalcMath {
   constructor(input) {
@@ -9,22 +10,29 @@ export default class СalcMath {
     this.input = input;
     this.dotFlag = false;
     this.actionFlag = false;
+    this.minusBeforeOperand2 = false;
     this.errorOccured = false;
     this.finalOperation = false;
     this.memory = 0;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  checkMinus(string) {
+    return (string.slice(0, 1) !== '-' ? +string : -string.slice(1, string.length));
+  }
+
   getOperands() {
     const value = this.input.value;
-    const checkMinus = (string) => (string.slice(0, 1) !== '-' ? +string : -string.slice(1, string.length));
-    let operatorPosition = value.indexOf(this.operator);
+    let operatorPosition = value.slice(0, 1) !== '-' ?
+      value.indexOf(this.operator) :
+      (value.slice(1, value.length).indexOf(this.operator) + 1);
 
     if (this.operator && operatorPosition > 0) {
-      this.operand2 = checkMinus(value.slice(value.indexOf(this.operator) + this.operator.length));
+      this.operand2 = this.checkMinus(value.slice(operatorPosition + this.operator.length));
     } else {
       operatorPosition = value.length;
     }
-    this.operand1 = checkMinus(value.slice(0, operatorPosition));
+    this.operand1 = this.checkMinus(value.slice(0, operatorPosition));
   }
 
   setOperands(setValue1 = '', setValue2 = '', operator = this.operator) {
@@ -80,34 +88,65 @@ export default class СalcMath {
       }
     };
 
-    if (this.input.value.indexOf(this.operator) === (this.input.value.length - 1)) {
+    if (this.input.value.indexOf(this.operator) === (this.input.value.length - 1) &&
+      this.actionFlag) {
+      if (!this.minusBeforeOperand2 && value === '-') {
+        this.minusBeforeOperand2 = true;
+        this.render(value);
+        return;
+      }
+      this.minusBeforeOperand2 = false;
       this.getOperands();
       this.input.value = this.operand1;
       this.commands.pop();
       initialSequence();
       return;
     }
+
     if (this.actionFlag) {
       this.submit();
       initialSequence();
       return;
     }
+
     if (!this.actionFlag) {
       initialSequence();
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  customRound(value) {
+    if (String(value).indexOf('.') > 0) {
+      let counter = 1;
+      let i = 0;
+      while (i < String(value).length - String(value).indexOf('.') && counter < 5) {
+        if (String(value).charAt(String(value).length - 1 - counter) === '0' ||
+          String(value).charAt(String(value).length - 1 - counter) === '9') {
+          counter++;
+        } else {
+          counter = 1;
+        }
+        i++;
+      }
+      return this.checkMinus(String(value)
+        .slice(0, String(value).length - 1 - counter));
+    }
+    return value;
+  }
+
   renderAnswer(value) {
     this.errorReset();
+    const roundedValue = this.customRound(value);
+
     this.operator = '';
-    this.operand1 = value;
+    this.operand1 = roundedValue;
     if (!String(this.operand1).split('').includes('.')) {
       this.dotFlag = false;
     } else {
       this.dotFlag = true;
     }
     this.actionFlag = false;
-    this.input.value = value;
+    this.input.value = roundedValue;
   }
 
   reset() {
@@ -115,6 +154,7 @@ export default class СalcMath {
     this.operand1 = 0;
     this.operand2 = 0;
     this.dotFlag = false;
+    this.minusBeforeOperand2 = false;
     this.actionFlag = false;
     this.finalOperation = false;
     this.input.value = '';
@@ -146,9 +186,5 @@ export default class СalcMath {
         operator: this.operator,
       });
     }
-  }
-
-  toggleMinus() {
-    this.input.value = (this.input.value.slice(0, 1) !== '-' ? `-${this.input.value}` : this.input.value.slice(1, this.input.value.length));
   }
 }

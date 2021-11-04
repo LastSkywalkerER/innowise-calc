@@ -38,13 +38,18 @@ document.addEventListener('keydown', (event) => {
   event.preventDefault();
   // eslint-disable-next-line prefer-destructuring
   let key = event.key;
-
   switch (key) {
     case 'Delete':
       key = 'AC';
       break;
+    case 'Backspace':
+      key = 'AC';
+      break;
     case 'Enter':
       key = '=';
+      break;
+    case ',':
+      key = '.';
       break;
     default:
       break;
