@@ -28,6 +28,18 @@ export default class ButtonsCommand extends Command {
       this.buttonList.percent.name,
       this.buttonList.oneDevX.name,
     ];
+    this.resetableButtons = [
+      this.buttonList.eq.name,
+      this.buttonList.xSquare.name,
+      this.buttonList.xCube.name,
+      this.buttonList.xy.name,
+      this.buttonList.ex.name,
+      this.buttonList.tenInX.name,
+      this.buttonList.squareRoot.name,
+      this.buttonList.cubeRoot.name,
+      this.buttonList.yRoot.name,
+      this.buttonList.xFact.name,
+    ];
   }
 
   commandExecute(SomeCommand, text) {
@@ -51,6 +63,9 @@ export default class ButtonsCommand extends Command {
     }, '');
 
     if (buttonsNumbers.includes(text)) {
+      if (this.subject.finalOperation) {
+        this.subject.reset();
+      }
       if (text !== this.buttonList.dot.name) {
         this.subject.render(text);
         return;
@@ -75,5 +90,9 @@ export default class ButtonsCommand extends Command {
     }
 
     this.commandExecute(this.buttonList[button].Command, text);
+
+    if (this.resetableButtons.includes(text)) {
+      this.subject.finalOperation = true;
+    }
   }
 }

@@ -3,12 +3,14 @@ export default class СalcMath {
   constructor(input) {
     this.operator = '';
     this.commands = [];
+    this.lastCommand = null;
     this.operand1 = 0;
     this.operand2 = 0;
     this.input = input;
     this.dotFlag = false;
     this.actionFlag = false;
     this.errorOccured = false;
+    this.finalOperation = false;
     this.memory = 0;
   }
 
@@ -55,6 +57,7 @@ export default class СalcMath {
 
   render(value) {
     this.errorReset();
+    this.finalOperation = false;
     if (this.input.value === 'Infinity') {
       this.reset();
     }
@@ -65,13 +68,14 @@ export default class СalcMath {
     this.errorReset();
 
     const initialSequence = () => {
-      if (this.input.value !== '' && this.input.value !== 'Infinity') {
+      if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
         this.dotFlag = false;
         this.commands.push(new Command(this));
+        this.lastCommand = new Command(this);
         this.operator = value;
         this.actionFlag = true;
         this.render(value);
-      } else if (value === '-') {
+      } else if (value === '-' && this.input.value === '') {
         this.render(value);
       }
     };
@@ -89,7 +93,6 @@ export default class СalcMath {
     this.errorReset();
     this.operator = '';
     this.operand1 = value;
-    this.operand2 = 0;
     if (!String(this.operand1).split('').includes('.')) {
       this.dotFlag = false;
     } else {
@@ -105,7 +108,9 @@ export default class СalcMath {
     this.operand2 = 0;
     this.dotFlag = false;
     this.actionFlag = false;
+    this.finalOperation = false;
     this.input.value = '';
+    this.lastCommand = null;
   }
 
   unDo() {
@@ -117,6 +122,15 @@ export default class СalcMath {
 
   submit() {
     this.getOperands();
+
+    if (this.finalOperation && this.lastCommand) {
+      this.lastCommand.execute({
+        operand1: this.operand1,
+        operand2: this.operand2,
+        operator: this.operator,
+      });
+    }
+
     if (this.operator) {
       this.commands[this.commands.length - 1].execute({
         operand1: this.operand1,

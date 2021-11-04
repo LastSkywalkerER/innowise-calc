@@ -35,6 +35,7 @@ buttons.addEventListener('click', (event) => {
 });
 
 document.addEventListener('keydown', (event) => {
+  event.preventDefault();
   // eslint-disable-next-line prefer-destructuring
   let key = event.key;
 

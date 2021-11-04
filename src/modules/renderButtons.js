@@ -6,7 +6,7 @@ import {
 } from './buttonNames';
 
 const renderButton = (name, place) => {
-  const button = document.createElement('button');
+  const button = document.createElement('div');
   button.classList.add('button');
 
   if (name === '0') {

@@ -157,7 +157,7 @@ const buttonNames = {
     Command: DotCommand,
   },
   unDo: {
-    name: 'unDo',
+    name: 'bck',
     Command: UnDoCommnd,
   },
 };
