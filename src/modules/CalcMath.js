@@ -80,12 +80,21 @@ export default class СalcMath {
       }
     };
 
+    if (this.input.value.indexOf(this.operator) === (this.input.value.length - 1)) {
+      this.getOperands();
+      this.input.value = this.operand1;
+      this.commands.pop();
+      initialSequence();
+      return;
+    }
     if (this.actionFlag) {
       this.submit();
       initialSequence();
+      return;
     }
     if (!this.actionFlag) {
       initialSequence();
+      return;
     }
   }
 

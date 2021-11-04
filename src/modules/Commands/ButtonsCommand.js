@@ -39,6 +39,8 @@ export default class ButtonsCommand extends Command {
       this.buttonList.cubeRoot.name,
       this.buttonList.yRoot.name,
       this.buttonList.xFact.name,
+      this.buttonList.mMinus.name,
+      this.buttonList.mPlus.name,
     ];
   }
 
