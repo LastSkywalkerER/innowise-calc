@@ -1,27 +1,41 @@
 import {
   buttonsNumbers,
   buttonsSimpleRight,
+  buttonNames,
 } from '../buttonNames';
 import Command from './Command';
 
 export default class ButtonsCommand extends Command {
-  constructor(subject, buttonList) {
+  constructor(subject) {
     super(subject);
-    this.buttonList = buttonList;
+    this.buttonList = buttonNames;
 
     this.nonHistory = [
       this.buttonList.dot.name,
       this.buttonList.reset.name,
       this.buttonList.eq.name,
+      this.buttonList.percent.name,
+      this.buttonList.oneDevX.name,
       this.buttonList.mc.name,
       this.buttonList.mPlus.name,
       this.buttonList.mMinus.name,
       this.buttonList.mr.name,
+      this.buttonList.unDo.name,
+    ];
+    this.nonSubmit = [
+      this.buttonList.dot.name,
+      this.buttonList.unDo.name,
+      this.buttonList.percent.name,
+      this.buttonList.oneDevX.name,
     ];
   }
 
   commandExecute(SomeCommand, text) {
     const command = new SomeCommand(this.subject);
+    if (this.subject.operator &&
+      !this.nonSubmit.includes(text)) {
+      this.subject.submit();
+    }
     if (!this.nonHistory.includes(text)) {
       this.subject.commands.push(command);
     }

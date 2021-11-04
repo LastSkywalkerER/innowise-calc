@@ -21,6 +21,7 @@ import MCCommand from './Commands/MCCommand';
 import MMinusCommand from './Commands/MMinusCommand';
 import MPlusCommand from './Commands/MPlusCommand';
 import MRCommand from './Commands/MRCommand';
+import UnDoCommnd from './Commands/UnDoCommnd';
 
 const buttonNames = {
   mc: {
@@ -155,6 +156,10 @@ const buttonNames = {
     name: '.',
     Command: DotCommand,
   },
+  unDo: {
+    name: 'unDo',
+    Command: UnDoCommnd,
+  },
 };
 
 const buttonsHard = [
@@ -172,6 +177,7 @@ const buttonsHard = [
   buttonNames.cubeRoot.name,
   buttonNames.yRoot.name,
   buttonNames.xFact.name,
+  buttonNames.unDo.name,
 ];
 const buttonsSimpleUp = [
   buttonNames.reset.name,
