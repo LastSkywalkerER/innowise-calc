@@ -117,19 +117,8 @@ export default class СalcMath {
   // eslint-disable-next-line class-methods-use-this
   customRound(value) {
     if (String(value).indexOf('.') > 0) {
-      let counter = 1;
-      let i = 0;
-      while (i < String(value).length - String(value).indexOf('.') && counter < 5) {
-        if (String(value).charAt(String(value).length - 1 - counter) === '0' ||
-          String(value).charAt(String(value).length - 1 - counter) === '9') {
-          counter++;
-        } else {
-          counter = 1;
-        }
-        i++;
-      }
-      return this.checkMinus(String(value)
-        .slice(0, String(value).length - 1 - counter));
+      return this.checkMinus(value
+        .toPrecision(5));
     }
     return value;
   }

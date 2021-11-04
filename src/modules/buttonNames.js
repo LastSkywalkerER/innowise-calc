@@ -192,15 +192,15 @@ const buttonsSimpleRight = [
   buttonNames.eq.name,
 ];
 const buttonsNumbers = [
-  buttonNames.one.name,
-  buttonNames.two.name,
-  buttonNames.three.name,
-  buttonNames.four.name,
-  buttonNames.five.name,
-  buttonNames.six.name,
   buttonNames.seven.name,
   buttonNames.eight.name,
   buttonNames.nine.name,
+  buttonNames.four.name,
+  buttonNames.five.name,
+  buttonNames.six.name,
+  buttonNames.one.name,
+  buttonNames.two.name,
+  buttonNames.three.name,
   buttonNames.zero.name,
   buttonNames.dot.name,
 ];
