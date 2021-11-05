@@ -24,6 +24,8 @@ export default class ButtonsCommand extends Command {
       this.buttonList.plusMinus.name,
     ];
     this.nonSubmit = [
+      this.buttonList.reset.name,
+      this.buttonList.eq.name,
       this.buttonList.dot.name,
       this.buttonList.unDo.name,
       this.buttonList.percent.name,
@@ -44,6 +46,7 @@ export default class ButtonsCommand extends Command {
       this.buttonList.xFact.name,
       this.buttonList.mMinus.name,
       this.buttonList.mPlus.name,
+      this.buttonList.unDo.name,
     ];
   }
 

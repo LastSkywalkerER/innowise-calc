@@ -9,7 +9,6 @@ export default class DevCommand extends Command {
       if (this.operand2 === 0) {
         throw Error('try to devide by zero');
       }
-      console.log(this.operand1, this.operand2, 'execute');
       this.subject.renderAnswer(this.operand1 / this.operand2);
     } catch (e) {
       this.subject.renderError(e);
@@ -17,7 +16,6 @@ export default class DevCommand extends Command {
   }
 
   unDo() {
-    console.log(this.operand1, this.operand2, 'undo');
     this.subject.setOperands(this.operand1, this.operand2, this.operator);
   }
 }

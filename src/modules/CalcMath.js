@@ -4,7 +4,9 @@ export default class СalcMath {
   constructor(input) {
     this.operator = '';
     this.commands = [];
-    this.lastCommand = null;
+    this.CommandToExecute = null;
+    this.LastCommand = null;
+    this.lastExecutedCommand = null;
     this.operand1 = 0;
     this.operand2 = 0;
     this.input = input;
@@ -45,6 +47,7 @@ export default class СalcMath {
 
     if (operator !== this.operator) {
       this.operator = operator;
+      this.actionFlag = true;
     }
 
     this.input.value = `${this.operand1}${operator}${this.operand2}`;
@@ -82,8 +85,8 @@ export default class СalcMath {
     const initialSequence = () => {
       if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
         this.dotFlag = false;
-        this.commands.push(new Command(this));
-        this.lastCommand = new Command(this);
+        this.LastCommand = Command;
+        this.CommandToExecute = Command;
         this.operator = value;
         this.actionFlag = true;
         this.render(value);
@@ -102,7 +105,6 @@ export default class СalcMath {
       this.minusBeforeOperand2 = false;
       this.getOperands();
       this.input.value = this.operand1;
-      this.commands.pop();
       initialSequence();
       return;
     }
@@ -151,36 +153,35 @@ export default class СalcMath {
     this.actionFlag = false;
     this.finalOperation = false;
     this.input.value = '';
-    this.lastCommand = null;
+    this.LastCommand = null;
   }
 
   unDo() {
-    this.reset();
     if (this.commands.length) {
       this.finalOperation = true;
-      this.lastCommand = this.commands.pop();
-      this.lastCommand.unDo();
+      this.lastExecutedCommand = this.commands.pop();
+      this.lastExecutedCommand.unDo();
     }
   }
 
   submit() {
     this.getOperands();
-
-    if (this.finalOperation && this.lastCommand) {
-      this.lastCommand.execute({
+    if (this.finalOperation && this.LastCommand) {
+      const command = new this.LastCommand(this);
+      command.execute({
         operand1: this.operand1,
         operand2: this.operand2,
         operator: this.operator,
       });
-      console.log('submit last');
-      this.commands.push(this.lastCommand);
+      this.commands.push(command);
     } else if (this.operator) {
-      this.commands[this.commands.length - 1].execute({
+      const command = new this.CommandToExecute(this);
+      command.execute({
         operand1: this.operand1,
         operand2: this.operand2,
         operator: this.operator,
       });
-      console.log('submit');
+      this.commands.push(command);
     }
   }
 }
