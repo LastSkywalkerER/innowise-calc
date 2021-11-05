@@ -6,7 +6,7 @@ export default class XFactCommand extends Command {
     this.subject.getOperands();
     this.operand1 = this.subject.operand1;
     try {
-      if (this.operand1 <= 0) {
+      if (this.operand1 < 0 || this.operand1 === Infinity) {
         throw Error('invalid operand');
       }
       let factorial = 1;

@@ -39,6 +39,8 @@ export default class СalcMath {
   }
 
   setOperands(setValue1 = '', setValue2 = '', operator) {
+    this.errorReset();
+
     let curOperator = operator;
     if (!Number.isNaN(setValue1)) {
       this.operand1 = this.customRound(setValue1);
