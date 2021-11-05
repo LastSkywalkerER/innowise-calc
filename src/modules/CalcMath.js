@@ -103,11 +103,12 @@ export default class СalcMath {
 
     if (this.input.value.indexOf(this.operator) === (this.input.value.length - 1) &&
       this.actionFlag) {
-      if (!this.minusBeforeOperand2 && value === '-') {
-        this.minusBeforeOperand2 = true;
-        this.render(value);
-        return;
-      }
+      // добавляет минус у второго операнда после оператора О_о
+      // if (!this.minusBeforeOperand2 && value === '-') {
+      //   this.minusBeforeOperand2 = true;
+      //   this.render(value);
+      //   return;
+      // }
       this.minusBeforeOperand2 = false;
       this.getOperands();
       this.input.value = this.operand1;
@@ -130,7 +131,7 @@ export default class СalcMath {
   customRound(value) {
     if (String(value).indexOf('.') > 0) {
       return this.checkMinus(value
-        .toPrecision(5));
+        .toPrecision(15));
     }
     return value;
   }

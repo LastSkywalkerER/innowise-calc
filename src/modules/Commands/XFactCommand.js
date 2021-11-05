@@ -10,8 +10,13 @@ export default class XFactCommand extends Command {
         throw Error('invalid operand');
       }
       let factorial = 1;
-      for (let i = 1; i <= this.operand1; i++) {
-        factorial *= i;
+      if (!String(this.operand1).split('').includes('.')) {
+        for (let i = 1; i <= this.operand1; i++) {
+          factorial *= i;
+        }
+      } else {
+        factorial = ((2 * 3.1415926535 * this.operand1) ** (1 / 2)) *
+          (this.operand1 ** this.operand1) * (2.7182818284 ** -this.operand1);
       }
       this.subject.setOperands(factorial);
     } catch (e) {
