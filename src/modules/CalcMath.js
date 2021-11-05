@@ -43,6 +43,10 @@ export default class СalcMath {
       this.operand2 = this.customRound(setValue2);
     }
 
+    if (operator !== this.operator) {
+      this.operator = operator;
+    }
+
     this.input.value = `${this.operand1}${operator}${this.operand2}`;
   }
 
@@ -153,7 +157,9 @@ export default class СalcMath {
   unDo() {
     this.reset();
     if (this.commands.length) {
-      this.commands.pop().unDo();
+      this.finalOperation = true;
+      this.lastCommand = this.commands.pop();
+      this.lastCommand.unDo();
     }
   }
 
@@ -166,14 +172,15 @@ export default class СalcMath {
         operand2: this.operand2,
         operator: this.operator,
       });
-    }
-
-    if (this.operator) {
+      console.log('submit last');
+      this.commands.push(this.lastCommand);
+    } else if (this.operator) {
       this.commands[this.commands.length - 1].execute({
         operand1: this.operand1,
         operand2: this.operand2,
         operator: this.operator,
       });
+      console.log('submit');
     }
   }
 }

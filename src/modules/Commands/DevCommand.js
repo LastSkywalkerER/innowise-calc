@@ -1,27 +1,23 @@
 import Command from './Command';
 
 export default class DevCommand extends Command {
-  execute({
-    operand1,
-    operand2,
-    operator,
-  }) {
+  execute() {
     try {
-      if (operand2 === 0) {
+      this.operand1 = this.subject.operand1;
+      this.operand2 = this.subject.operand2;
+      this.operator = this.subject.operator;
+      if (this.operand2 === 0) {
         throw Error('try to devide by zero');
       }
-      this.operand1 = operand1;
-      this.operand2 = operand2;
-      this.operator = operator;
-      this.subject.renderAnswer(operand1 / operand2);
+      console.log(this.operand1, this.operand2, 'execute');
+      this.subject.renderAnswer(this.operand1 / this.operand2);
     } catch (e) {
       this.subject.renderError(e);
     }
   }
 
   unDo() {
-    this.subject.render(this.operand1);
-    this.subject.render('/');
-    this.subject.render(this.operand2);
+    console.log(this.operand1, this.operand2, 'undo');
+    this.subject.setOperands(this.operand1, this.operand2, this.operator);
   }
 }
