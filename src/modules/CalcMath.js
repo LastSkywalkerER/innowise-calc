@@ -157,30 +157,30 @@ export default class СalcMath {
   }
 
   unDo() {
+    console.log('this.commands undo begin', this.commands);
     if (this.commands.length) {
       this.finalOperation = true;
       this.lastExecutedCommand = this.commands.pop();
       this.lastExecutedCommand.unDo();
     }
+    console.log('this.commands undo end', this.commands);
   }
 
   submit() {
     this.getOperands();
-    if (this.finalOperation && this.LastCommand) {
+    console.log(this.lastExecutedCommand, this.finalOperation, this.LastCommand, this.operator);
+    if (this.lastExecutedCommand) {
+      this.lastExecutedCommand.execute();
+      this.commands.push(this.lastExecutedCommand);
+      this.lastExecutedCommand = null;
+      this.LastCommand = null;
+    } else if (this.finalOperation && this.LastCommand) {
       const command = new this.LastCommand(this);
-      command.execute({
-        operand1: this.operand1,
-        operand2: this.operand2,
-        operator: this.operator,
-      });
+      command.execute();
       this.commands.push(command);
     } else if (this.operator) {
       const command = new this.CommandToExecute(this);
-      command.execute({
-        operand1: this.operand1,
-        operand2: this.operand2,
-        operator: this.operator,
-      });
+      command.execute();
       this.commands.push(command);
     }
   }

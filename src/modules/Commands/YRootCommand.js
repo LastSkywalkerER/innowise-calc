@@ -4,6 +4,7 @@ export default class YRootCommand extends Command {
   execute() {
     this.operand1 = this.subject.operand1;
     this.operand2 = this.subject.operand2;
+    this.operator = this.subject.operator;
     try {
       if (this.operand1 === 0) {
         throw Error('try to devide by zero');
@@ -15,5 +16,9 @@ export default class YRootCommand extends Command {
     } catch (e) {
       this.subject.renderError(e);
     }
+  }
+
+  unDo() {
+    this.subject.setOperands(this.operand1, this.operand2, this.operator);
   }
 }

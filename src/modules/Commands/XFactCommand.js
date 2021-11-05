@@ -18,4 +18,8 @@ export default class XFactCommand extends Command {
       this.subject.renderError(e);
     }
   }
+
+  unDo() {
+    this.subject.setOperands(this.operand1);
+  }
 }
