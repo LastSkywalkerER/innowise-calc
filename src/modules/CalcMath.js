@@ -52,7 +52,7 @@ export default class СalcMath {
       this.operator = operator;
       this.actionFlag = true;
     } else {
-      curOperator = this.operator;
+      curOperator = '';
     }
 
     this.input.value = `${this.operand1}${curOperator}${this.operand2}`;

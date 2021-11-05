@@ -5,8 +5,9 @@ export default class PlusMinusCommand extends Command {
     this.subject.getOperands();
     this.operand1 = this.subject.operand1;
     this.operand2 = this.subject.operand2;
+    this.operator = this.subject.operator;
     if (this.operand2 && !this.subject.finalOperation) {
-      this.subject.setOperands(this.operand1, -this.operand2);
+      this.subject.setOperands(this.operand1, -this.operand2, this.operator);
     } else {
       this.subject.setOperands(-this.operand1);
     }
