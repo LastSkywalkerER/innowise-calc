@@ -22,7 +22,7 @@ export default class СalcMath {
   }
 
   getOperands() {
-    const value = this.input.value;
+    const value = String(this.input.value);
     let operatorPosition = value.slice(0, 1) !== '-' ?
       value.indexOf(this.operator) :
       (value.slice(1, value.length).indexOf(this.operator) + 1);
@@ -37,10 +37,10 @@ export default class СalcMath {
 
   setOperands(setValue1 = '', setValue2 = '', operator = this.operator) {
     if (!Number.isNaN(setValue1)) {
-      this.operand1 = setValue1;
+      this.operand1 = this.customRound(setValue1);
     }
     if (!Number.isNaN(setValue2)) {
-      this.operand2 = setValue2;
+      this.operand2 = this.customRound(setValue2);
     }
 
     this.input.value = `${this.operand1}${operator}${this.operand2}`;
