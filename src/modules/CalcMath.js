@@ -7,6 +7,7 @@ export default class СalcMath {
     this.CommandToExecute = null;
     this.LastCommand = null;
     this.lastExecutedCommand = null;
+    this.UsedCommands = new Map();
     this.operand1 = 0;
     this.operand2 = 0;
     this.input = input;
@@ -37,7 +38,8 @@ export default class СalcMath {
     this.operand1 = this.checkMinus(value.slice(0, operatorPosition));
   }
 
-  setOperands(setValue1 = '', setValue2 = '', operator = this.operator) {
+  setOperands(setValue1 = '', setValue2 = '', operator) {
+    let curOperator = operator;
     if (!Number.isNaN(setValue1)) {
       this.operand1 = this.customRound(setValue1);
     }
@@ -45,12 +47,15 @@ export default class СalcMath {
       this.operand2 = this.customRound(setValue2);
     }
 
-    if (operator !== this.operator) {
+    if (operator) {
+      curOperator = operator;
       this.operator = operator;
       this.actionFlag = true;
+    } else {
+      curOperator = this.operator;
     }
 
-    this.input.value = `${this.operand1}${operator}${this.operand2}`;
+    this.input.value = `${this.operand1}${curOperator}${this.operand2}`;
   }
 
   setMemory(value) {
@@ -87,6 +92,7 @@ export default class СalcMath {
         this.dotFlag = false;
         this.LastCommand = Command;
         this.CommandToExecute = Command;
+        this.UsedCommands.set(value, Command);
         this.operator = value;
         this.actionFlag = true;
         this.render(value);
@@ -133,7 +139,7 @@ export default class СalcMath {
     this.errorReset();
     const roundedValue = this.customRound(value);
 
-    this.operator = '';
+    // this.operator = '';
     this.operand1 = roundedValue;
     if (!String(this.operand1).split('').includes('.')) {
       this.dotFlag = false;
@@ -157,23 +163,20 @@ export default class СalcMath {
   }
 
   unDo() {
-    // console.log('this.commands undo begin', this.commands);
     if (this.commands.length) {
       this.finalOperation = true;
       this.lastExecutedCommand = this.commands.pop();
       this.lastExecutedCommand.unDo();
     }
-    // console.log('this.commands undo end', this.commands);
   }
 
   submit() {
     this.getOperands();
-    // console.log(this.lastExecutedCommand, this.finalOperation, this.LastCommand, this.operator);
     if (this.lastExecutedCommand) {
       this.lastExecutedCommand.execute();
       this.commands.push(this.lastExecutedCommand);
       this.lastExecutedCommand = null;
-      this.LastCommand = null;
+      this.LastCommand = this.UsedCommands.get(this.operator);
     } else if (this.finalOperation && this.LastCommand) {
       const command = new this.LastCommand(this);
       command.execute();
