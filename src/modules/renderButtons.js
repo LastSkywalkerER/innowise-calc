@@ -5,17 +5,17 @@ import {
   buttonsNumbers,
 } from './buttonNames';
 
-const renderButton = (name, place) => {
-  const button = document.createElement('div');
-  button.classList.add('button');
+const renderButton = (button, place) => {
+  const buttonElement = document.createElement('div');
+  buttonElement.classList.add('button');
 
-  if (name === '0') {
-    button.classList.add('zero');
+  if (button.buttonText === '0') {
+    buttonElement.classList.add('zero');
   }
 
-  button.innerText = name;
-  button.setAttribute('calcAct', name);
-  place.append(button);
+  buttonElement.innerText = button.buttonText;
+  buttonElement.setAttribute('calcAct', button.name);
+  place.append(buttonElement);
 };
 
 export default (
@@ -24,16 +24,16 @@ export default (
   buttonsSimpleRightBlock,
   buttonsNumbersBlock,
 ) => {
-  buttonsHard.forEach((name) => {
-    renderButton(name, buttonsHardBlock);
+  buttonsHard.forEach((button) => {
+    renderButton(button, buttonsHardBlock);
   });
-  buttonsSimpleUp.forEach((name) => {
-    renderButton(name, buttonsSimpleUpBlock);
+  buttonsSimpleUp.forEach((button) => {
+    renderButton(button, buttonsSimpleUpBlock);
   });
-  buttonsSimpleRight.forEach((name) => {
-    renderButton(name, buttonsSimpleRightBlock);
+  buttonsSimpleRight.forEach((button) => {
+    renderButton(button, buttonsSimpleRightBlock);
   });
-  buttonsNumbers.forEach((name) => {
-    renderButton(name, buttonsNumbersBlock);
+  buttonsNumbers.forEach((button) => {
+    renderButton(button, buttonsNumbersBlock);
   });
 };

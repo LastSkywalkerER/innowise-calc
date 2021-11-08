@@ -1,3 +1,6 @@
+import {
+  buttonNames,
+} from './buttonNames';
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 export default class СalcMath {
@@ -83,7 +86,14 @@ export default class СalcMath {
     if (this.input.value === 'Infinity') {
       this.reset();
     }
-    this.input.value += value;
+    if (value === buttonNames.dot.renderText) {
+      if (!this.dotFlag) {
+        this.dotFlag = true;
+        this.input.value += value;
+      }
+    } else {
+      this.input.value += value;
+    }
   }
 
   renderAction(value, Command) {
@@ -166,6 +176,7 @@ export default class СalcMath {
   }
 
   unDo() {
+    console.log(this.commands);
     if (this.commands.length) {
       this.finalOperation = true;
       this.lastExecutedCommand = this.commands.pop();

@@ -1,6 +1,3 @@
-import EqualCommand from './Commands/EqualCommand';
-import ResetCommand from './Commands/ResetCommand';
-import DotCommand from './Commands/DotCommand';
 import DevCommand from './Commands/DevCommand';
 import MultCommand from './Commands/MultCommand';
 import MinusCommand from './Commands/MinusCommand';
@@ -21,188 +18,321 @@ import MCCommand from './Commands/MCCommand';
 import MMinusCommand from './Commands/MMinusCommand';
 import MPlusCommand from './Commands/MPlusCommand';
 import MRCommand from './Commands/MRCommand';
-import UnDoCommnd from './Commands/UnDoCommnd';
 
 const buttonNames = {
   mc: {
     name: 'mc',
+    buttonText: 'mc',
     Command: MCCommand,
   },
   mPlus: {
-    name: 'm+',
+    name: 'mPlus',
+    buttonText: 'm+',
     Command: MPlusCommand,
   },
   mMinus: {
-    name: 'm-',
+    name: 'mMinus',
+    buttonText: 'm-',
     Command: MMinusCommand,
   },
   mr: {
     name: 'mr',
+    buttonText: 'mr',
     Command: MRCommand,
   },
   xSquare: {
-    name: 'x²',
+    name: 'xSquare',
+    buttonText: 'x²',
+    renderText: '²',
     Command: XSquareCommand,
   },
   xCube: {
-    name: 'x³',
+    name: 'xCube',
+    buttonText: 'x³',
+    renderText: '³',
     Command: XCubeCommand,
   },
   xy: {
-    name: 'xʸ',
+    name: 'xy',
+    buttonText: 'xʸ',
+    renderText: '^',
     Command: XInYCommand,
   },
   ex: {
-    name: 'eˣ',
+    name: 'ex',
+    buttonText: 'eˣ',
+    renderText: '2.71828182846^',
     Command: EInxCommand,
   },
   tenInX: {
-    name: '10ˣ',
+    name: 'tenInX',
+    buttonText: '10ˣ',
+    renderText: '10^',
     Command: TenInXCommand,
   },
   oneDevX: {
-    name: '1/x',
+    name: 'oneDevX',
+    buttonText: '1/x',
+    renderText: '1/',
     Command: OneDevXCommand,
   },
   squareRoot: {
-    name: '√',
+    name: 'squareRoot',
+    buttonText: '²√',
+    renderText: '²√',
     Command: SquareRootCommand,
   },
   cubeRoot: {
-    name: '³√',
+    name: 'cubeRoot',
+    buttonText: '³√',
+    renderText: '³√',
     Command: CubeRootCommand,
   },
   yRoot: {
-    name: 'ʸ√',
+    name: 'yRoot',
+    buttonText: 'ʸ√',
+    renderText: '√',
     Command: YRootCommand,
   },
   xFact: {
-    name: 'x!',
+    name: 'xFact',
+    buttonText: 'x!',
+    renderText: '!',
     Command: XFactCommand,
   },
   reset: {
-    name: 'AC',
-    Command: ResetCommand,
+    name: 'reset',
+    buttonText: 'AC',
+    Command: null,
   },
   plusMinus: {
-    name: '+/-',
+    name: 'plusMinus',
+    buttonText: '+/-',
+    renderText: '-',
     Command: PlusMinusCommand,
   },
   percent: {
-    name: '%',
+    name: 'percent',
+    buttonText: '%',
+    renderText: '%',
     Command: PercentCommand,
   },
   dev: {
-    name: '/',
+    name: 'dev',
+    buttonText: '/',
+    renderText: '/',
     Command: DevCommand,
   },
   mult: {
-    name: '*',
+    name: 'mult',
+    buttonText: '*',
+    renderText: '*',
     Command: MultCommand,
   },
   minus: {
-    name: '-',
+    name: 'minus',
+    buttonText: '-',
+    renderText: '-',
     Command: MinusCommand,
   },
   plus: {
-    name: '+',
+    name: 'plus',
+    buttonText: '+',
+    renderText: '+',
     Command: PlusCommand,
   },
   eq: {
-    name: '=',
-    Command: EqualCommand,
+    name: 'eq',
+    buttonText: '=',
+    renderText: '=',
+    Command: null,
   },
   one: {
-    name: '1',
+    name: 'one',
+    buttonText: '1',
+    renderText: '1',
     Command: null,
   },
   two: {
-    name: '2',
+    name: 'two',
+    buttonText: '2',
+    renderText: '2',
     Command: null,
   },
   three: {
-    name: '3',
+    name: 'three',
+    buttonText: '3',
+    renderText: '3',
     Command: null,
   },
   four: {
-    name: '4',
+    name: 'four',
+    buttonText: '4',
+    renderText: '4',
     Command: null,
   },
   five: {
-    name: '5',
+    name: 'five',
+    buttonText: '5',
+    renderText: '5',
     Command: null,
   },
   six: {
-    name: '6',
+    name: 'six',
+    buttonText: '6',
+    renderText: '6',
     Command: null,
   },
   seven: {
-    name: '7',
+    name: 'seven',
+    buttonText: '7',
+    renderText: '7',
     Command: null,
   },
   eight: {
-    name: '8',
+    name: 'eight',
+    buttonText: '8',
+    renderText: '8',
     Command: null,
   },
   nine: {
-    name: '9',
+    name: 'nine',
+    buttonText: '9',
+    renderText: '9',
     Command: null,
   },
   zero: {
-    name: '0',
+    name: 'zero',
+    buttonText: '0',
+    renderText: '0',
     Command: null,
   },
   dot: {
-    name: '.',
-    Command: DotCommand,
+    name: 'dot',
+    buttonText: '.',
+    renderText: '.',
+    Command: null,
   },
   unDo: {
-    name: 'bck',
-    Command: UnDoCommnd,
+    name: 'unDo',
+    buttonText: 'bck',
+    Command: null,
   },
 };
 
 const buttonsHard = [
-  buttonNames.mc.name,
-  buttonNames.mPlus.name,
-  buttonNames.mMinus.name,
-  buttonNames.mr.name,
-  buttonNames.xSquare.name,
-  buttonNames.xCube.name,
-  buttonNames.xy.name,
-  buttonNames.ex.name,
-  buttonNames.tenInX.name,
-  buttonNames.oneDevX.name,
-  buttonNames.squareRoot.name,
-  buttonNames.cubeRoot.name,
-  buttonNames.yRoot.name,
-  buttonNames.xFact.name,
-  buttonNames.unDo.name,
+  buttonNames.mc,
+  buttonNames.mPlus,
+  buttonNames.mMinus,
+  buttonNames.mr,
+  buttonNames.xSquare,
+  buttonNames.xCube,
+  buttonNames.xy,
+  buttonNames.ex,
+  buttonNames.tenInX,
+  buttonNames.oneDevX,
+  buttonNames.squareRoot,
+  buttonNames.cubeRoot,
+  buttonNames.yRoot,
+  buttonNames.xFact,
+  buttonNames.unDo,
 ];
 const buttonsSimpleUp = [
-  buttonNames.reset.name,
-  buttonNames.plusMinus.name,
-  buttonNames.percent.name,
+  buttonNames.reset,
+  buttonNames.plusMinus,
+  buttonNames.percent,
 ];
 const buttonsSimpleRight = [
-  buttonNames.dev.name,
-  buttonNames.mult.name,
-  buttonNames.minus.name,
-  buttonNames.plus.name,
-  buttonNames.eq.name,
+  buttonNames.dev,
+  buttonNames.mult,
+  buttonNames.minus,
+  buttonNames.plus,
+  buttonNames.eq,
 ];
 const buttonsNumbers = [
-  buttonNames.seven.name,
-  buttonNames.eight.name,
-  buttonNames.nine.name,
-  buttonNames.four.name,
-  buttonNames.five.name,
-  buttonNames.six.name,
-  buttonNames.one.name,
-  buttonNames.two.name,
-  buttonNames.three.name,
-  buttonNames.zero.name,
-  buttonNames.dot.name,
+  buttonNames.seven,
+  buttonNames.eight,
+  buttonNames.nine,
+  buttonNames.four,
+  buttonNames.five,
+  buttonNames.six,
+  buttonNames.one,
+  buttonNames.two,
+  buttonNames.three,
+  buttonNames.zero,
+  buttonNames.dot,
+];
+
+const nonHistory = [
+  buttonNames.dot,
+  buttonNames.reset,
+  buttonNames.eq,
+  buttonNames.percent,
+  buttonNames.oneDevX,
+  buttonNames.mc,
+  buttonNames.mPlus,
+  buttonNames.mMinus,
+  buttonNames.mr,
+  buttonNames.unDo,
+  buttonNames.plusMinus,
+];
+
+const nonSubmit = [
+  buttonNames.reset,
+  buttonNames.eq,
+  buttonNames.dot,
+  buttonNames.unDo,
+  buttonNames.percent,
+  buttonNames.oneDevX,
+  buttonNames.plusMinus,
+];
+
+const resetableButtons = [
+  buttonNames.eq,
+  buttonNames.xSquare,
+  buttonNames.xCube,
+  buttonNames.ex,
+  buttonNames.tenInX,
+  buttonNames.oneDevX,
+  buttonNames.percent,
+  buttonNames.squareRoot,
+  buttonNames.cubeRoot,
+  buttonNames.xFact,
+  buttonNames.mMinus,
+  buttonNames.mPlus,
+  buttonNames.unDo,
+];
+
+const memoryButtons = [
+  buttonNames.mc,
+  buttonNames.mPlus,
+  buttonNames.mMinus,
+  buttonNames.mr,
+];
+
+const answerWithOneOperand = [
+  buttonNames.xSquare,
+  buttonNames.xCube,
+  buttonNames.ex,
+  buttonNames.tenInX,
+  buttonNames.squareRoot,
+  buttonNames.cubeRoot,
+  buttonNames.xFact,
+];
+
+const answerWithTwoOperands = [
+  buttonNames.dev,
+  buttonNames.mult,
+  buttonNames.minus,
+  buttonNames.plus,
+  buttonNames.xy,
+  buttonNames.yRoot,
+];
+
+const changeOneOperand = [
+  buttonNames.oneDevX,
+  buttonNames.plusMinus,
+  buttonNames.percent,
 ];
 
 export {
@@ -210,5 +340,12 @@ export {
   buttonsSimpleUp,
   buttonsSimpleRight,
   buttonsNumbers,
+  nonHistory,
+  nonSubmit,
+  resetableButtons,
+  memoryButtons,
+  answerWithOneOperand,
+  answerWithTwoOperands,
+  changeOneOperand,
   buttonNames,
 };

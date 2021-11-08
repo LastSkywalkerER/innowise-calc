@@ -1,6 +1,6 @@
 import changeTheme from './modules/changeTheme';
 import renderButtons from './modules/renderButtons';
-import Command from './modules/Commands/ButtonsCommand';
+import CommandsManager from './modules/CommandsManager';
 import СalcMath from './modules/CalcMath';
 import {
   buttonNames,
@@ -17,7 +17,7 @@ const buttonsSimpleUpBlock = buttons.querySelector('.simple--up');
 const buttonsSimpleRightBlock = buttons.querySelector('.simple--right');
 const buttonsNumbersBlock = buttons.querySelector('.numbers');
 
-const command = new Command(new СalcMath(input), buttonNames);
+const commandsManager = new CommandsManager(new СalcMath(input));
 
 changeTheme();
 
@@ -30,7 +30,7 @@ renderButtons(
 
 buttons.addEventListener('click', (event) => {
   if (event.target.hasAttribute('calcAct')) {
-    command.execute(event.target.getAttribute('calcAct'));
+    commandsManager.execute(event.target.getAttribute('calcAct'));
   }
 });
 
@@ -54,16 +54,23 @@ document.addEventListener('keydown', (event) => {
     default:
       break;
   }
+
   try {
-    command.execute(key);
-    const button = buttons.querySelector(`[calcAct="${key}"]`);
-    button.classList.add('clicked-button');
+    const button = buttonNames[Object.keys(buttonNames).reduce((prev, curr) => {
+      if (buttonNames[curr].buttonText === key) {
+        return curr;
+      }
+      return prev;
+    }, {})];
+    commandsManager.execute(button.name);
+    const buttonElement = buttons.querySelector(`[calcAct="${button.name}"]`);
+    buttonElement.classList.add('clicked-button');
     setTimeout(() => {
-      button.classList.remove('clicked-button');
+      buttonElement.classList.remove('clicked-button');
     }, 300);
     // eslint-disable-next-line no-empty
   } catch (e) {
-
+    // console.warn(e);
   }
 });
 
