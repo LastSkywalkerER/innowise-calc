@@ -102,7 +102,6 @@ export default class СalcMath {
     const initialSequence = () => {
       if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
         this.dotFlag = false;
-        this.LastCommand = Command;
         this.CommandToExecute = Command;
         this.UsedCommands.set(value, Command);
         this.operator = value;
@@ -176,29 +175,40 @@ export default class СalcMath {
   }
 
   unDo() {
-    console.log(this.commands);
     if (this.commands.length) {
       this.finalOperation = true;
       this.lastExecutedCommand = this.commands.pop();
-      this.lastExecutedCommand.unDo();
+      this.lastExecutedCommand.unDo(this.setOperands);
     }
   }
 
   submit() {
     this.getOperands();
+
+    const executer = (Command) => {
+      const command = new Command({
+        operand1: this.operand1,
+        operand2: this.operand2,
+        operator: this.operator,
+      });
+      try {
+        this.renderAnswer(command.execute());
+        this.commands.push(command);
+        this.LastCommand = this.CommandToExecute;
+      } catch (e) {
+        this.renderError(e);
+      }
+    };
+
     if (this.lastExecutedCommand) {
       this.lastExecutedCommand.execute();
       this.commands.push(this.lastExecutedCommand);
       this.lastExecutedCommand = null;
       this.LastCommand = this.UsedCommands.get(this.operator);
     } else if (this.finalOperation && this.LastCommand) {
-      const command = new this.LastCommand(this);
-      command.execute();
-      this.commands.push(command);
+      executer(this.LastCommand);
     } else if (this.operator) {
-      const command = new this.CommandToExecute(this);
-      command.execute();
-      this.commands.push(command);
+      executer(this.CommandToExecute);
     }
   }
 }

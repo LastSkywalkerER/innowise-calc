@@ -1,6 +1,12 @@
 export default class Command {
-  constructor(subject) {
-    this.subject = subject;
+  constructor({
+    operand1,
+    operand2,
+    operator,
+  }) {
+    this.operand1 = operand1;
+    this.operand2 = operand2;
+    this.operator = operator;
 
     if (this.constructor.name === 'Command') {
       throw new Error(`${this.constructor.name}: can not create instance of interface`);
