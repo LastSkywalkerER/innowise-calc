@@ -72,7 +72,6 @@ export default class СalcMath {
     let curOperand2 = '';
     let curOperator = '';
 
-    console.log(operand1);
     if (operand1 || operand1 === 0) {
       checkDot(operand1);
       curOperand1 = this.customRound(operand1);
@@ -117,7 +116,6 @@ export default class СalcMath {
 
     if (result.memory || result.memory === 0) {
       this.memory = result.memory;
-      console.log(this.memory, result);
     }
 
     if (result.operand1 || result.operand1 === 0) {

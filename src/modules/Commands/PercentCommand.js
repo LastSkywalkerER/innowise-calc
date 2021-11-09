@@ -15,4 +15,12 @@ export default class PercentCommand extends Command {
       operator: this.operator,
     };
   }
+
+  unDo() {
+    return {
+      operand1: this.operand1,
+      operand2: this.operand2,
+      operator: this.operator,
+    };
+  }
 }
