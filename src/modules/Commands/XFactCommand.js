@@ -15,7 +15,9 @@ export default class XFactCommand extends Command {
       factorial = ((2 * 3.1415926535 * this.operand1) ** (1 / 2)) *
         (this.operand1 ** this.operand1) * (2.7182818284 ** -this.operand1);
     }
-    return factorial;
+    return {
+      operand1: factorial,
+    };
   }
 
   unDo() {

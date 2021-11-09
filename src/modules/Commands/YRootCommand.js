@@ -8,7 +8,9 @@ export default class YRootCommand extends Command {
     if (this.operand2 <= 0) {
       throw Error('invalid operand under the root');
     }
-    return this.operand2 ** (1 / this.operand1);
+    return {
+      operand1: this.operand2 ** (1 / this.operand1),
+    };
   }
 
   unDo() {

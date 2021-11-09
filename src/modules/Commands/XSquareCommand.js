@@ -2,7 +2,9 @@ import Command from './Command';
 
 export default class XSquareCommand extends Command {
   execute() {
-    return this.operand1 ** 2;
+    return {
+      operand1: this.operand1 ** 2,
+    };
   }
 
   unDo() {

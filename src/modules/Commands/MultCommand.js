@@ -2,7 +2,9 @@ import Command from './Command';
 
 export default class MultCommand extends Command {
   execute() {
-    return this.operand1 * this.operand2;
+    return {
+      operand1: this.operand1 * this.operand2,
+    };
   }
 
   unDo() {

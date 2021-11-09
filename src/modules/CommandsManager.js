@@ -1,8 +1,6 @@
 import {
   buttonsNumbers,
   buttonNames,
-  nonHistory,
-  nonSubmit,
   resetableButtons,
   memoryButtons,
   answerWithOneOperand,
@@ -13,18 +11,6 @@ import {
 export default class CommandsManager {
   constructor(calculator) {
     this.calculator = calculator;
-  }
-
-  commandExecute(SomeCommand, text) {
-    const command = new SomeCommand(this.calculator);
-    if (this.calculator.operator &&
-      !nonSubmit.includes(text)) {
-      this.calculator.submit();
-    }
-    if (!nonHistory.includes(text)) {
-      this.calculator.commands.push(command);
-    }
-    command.execute(text);
   }
 
   execute(buttonName) {
@@ -54,12 +40,13 @@ export default class CommandsManager {
     }
 
     if (changeOneOperand.includes(button)) {
-      //
+      this.calculator.executer(button.Command);
       return;
     }
 
     if (memoryButtons.includes(button)) {
-      //
+      this.calculator.submit();
+      // this.calculator.setMemory();
       return;
     }
 

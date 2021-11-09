@@ -2,7 +2,9 @@ import Command from './Command';
 
 export default class TenInXCommand extends Command {
   execute() {
-    return 10 ** this.operand1;
+    return {
+      operand1: 10 ** this.operand1,
+    };
   }
 
   unDo() {

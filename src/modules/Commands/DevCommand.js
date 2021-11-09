@@ -2,10 +2,12 @@ import Command from './Command';
 
 export default class DevCommand extends Command {
   execute() {
-    if (this.operand2 === 0) {
+    if (this.operand2 === 0 || this.operand2 === '') {
       throw Error('try to devide by zero');
     }
-    return this.operand1 / this.operand2;
+    return {
+      operand1: this.operand1 / this.operand2,
+    };
   }
 
   unDo() {

@@ -41,15 +41,29 @@ export default class СalcMath {
     this.operand1 = this.checkMinus(value.slice(0, operatorPosition));
   }
 
-  setOperands(setValue1 = '', setValue2 = '', operator) {
+  setOperands({
+    operand1,
+    operand2,
+    operator,
+  }) {
     this.errorReset();
 
+    const checkDot = (operand) => {
+      if (!String(operand).split('').includes('.')) {
+        this.dotFlag = false;
+      } else {
+        this.dotFlag = true;
+      }
+    };
+
     let curOperator = operator;
-    if (!Number.isNaN(setValue1)) {
-      this.operand1 = this.customRound(setValue1);
+    if (operand1) {
+      checkDot(operand1);
+      this.operand1 = this.customRound(operand1);
     }
-    if (!Number.isNaN(setValue2)) {
-      this.operand2 = this.customRound(setValue2);
+    if (operand2) {
+      checkDot(operand2);
+      this.operand2 = this.customRound(operand2);
     }
 
     if (operator) {
@@ -57,6 +71,7 @@ export default class СalcMath {
       this.actionFlag = true;
     } else {
       curOperator = '';
+      this.actionFlag = false;
     }
     this.operator = curOperator;
 
@@ -141,25 +156,28 @@ export default class СalcMath {
   // eslint-disable-next-line class-methods-use-this
   customRound(value) {
     if (String(value).indexOf('.') > 0) {
-      return this.checkMinus(value
-        .toPrecision(15));
+      const precisionNumber = 5;
+      let numberWrongZero = 0;
+      let numberWrongNine = 0;
+      let lastChar = String(value).charAt(String(value).length - 1);
+
+      for (let i = String(value).length - 2; i > String(value).indexOf('.'); i--) {
+        if (String(value).charAt(i) === '0' && lastChar === '0') {
+          numberWrongZero += 1;
+        }
+        if (String(value).charAt(i) === '9' && lastChar === '9') {
+          numberWrongNine += 1;
+        }
+
+        lastChar = String(value).charAt(i);
+      }
+
+      if (numberWrongZero > precisionNumber || numberWrongNine > precisionNumber) {
+        return this.checkMinus(value
+          .toPrecision(precisionNumber));
+      }
     }
     return value;
-  }
-
-  renderAnswer(value) {
-    this.errorReset();
-    const roundedValue = this.customRound(value);
-
-    // this.operator = '';
-    this.operand1 = roundedValue;
-    if (!String(this.operand1).split('').includes('.')) {
-      this.dotFlag = false;
-    } else {
-      this.dotFlag = true;
-    }
-    this.actionFlag = false;
-    this.input.value = roundedValue;
   }
 
   reset() {
@@ -178,7 +196,7 @@ export default class СalcMath {
     if (this.commands.length) {
       this.finalOperation = true;
       this.lastExecutedCommand = this.commands.pop();
-      this.lastExecutedCommand.unDo(this.setOperands);
+      this.setOperands(this.lastExecutedCommand.unDo());
     }
   }
 
@@ -191,12 +209,13 @@ export default class СalcMath {
       operator: this.operator,
     });
     try {
-      this.renderAnswer(command.execute());
+      this.setOperands(command.execute());
       this.commands.push(command);
       this.LastCommand = this.CommandToExecute;
     } catch (e) {
       if (e.name === 'Error') {
         this.renderError(e);
+        console.error(e);
       } else {
         // eslint-disable-next-line no-console
         console.error(e);
