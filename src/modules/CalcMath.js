@@ -72,18 +72,19 @@ export default class СalcMath {
     let curOperand2 = '';
     let curOperator = '';
 
-    if (operand1 !== undefined) {
+    console.log(operand1);
+    if (operand1 || operand1 === 0) {
       checkDot(operand1);
       curOperand1 = this.customRound(operand1);
       this.operand1 = curOperand1;
     }
-    if (operand2 !== undefined) {
+    if (operand2) {
       checkDot(operand2);
       curOperand2 = this.customRound(operand2);
       this.operand2 = curOperand2;
     }
 
-    if (operator !== undefined) {
+    if (operator) {
       curOperator = operator;
       this.operator = curOperator;
       this.actionFlag = true;
@@ -105,10 +106,23 @@ export default class СalcMath {
       operator: this.operator,
       memory: this.memory,
     });
-    const result = command.execute(this.operand1);
+    let result = {};
 
-    this.memory = result.memory;
-    this.setOperands(result);
+    try {
+      result = command.execute(this.operand1);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
+    }
+
+    if (result.memory || result.memory === 0) {
+      this.memory = result.memory;
+      console.log(this.memory, result);
+    }
+
+    if (result.operand1 || result.operand1 === 0) {
+      this.setOperands(result);
+    }
   }
 
   renderError(e) {
