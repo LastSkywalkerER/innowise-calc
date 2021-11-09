@@ -263,30 +263,6 @@ const buttonsNumbers = [
   buttonNames.dot,
 ];
 
-const nonHistory = [
-  buttonNames.dot,
-  buttonNames.reset,
-  buttonNames.eq,
-  buttonNames.percent,
-  buttonNames.oneDevX,
-  buttonNames.mc,
-  buttonNames.mPlus,
-  buttonNames.mMinus,
-  buttonNames.mr,
-  buttonNames.unDo,
-  buttonNames.plusMinus,
-];
-
-const nonSubmit = [
-  buttonNames.reset,
-  buttonNames.eq,
-  buttonNames.dot,
-  buttonNames.unDo,
-  buttonNames.percent,
-  buttonNames.oneDevX,
-  buttonNames.plusMinus,
-];
-
 const resetableButtons = [
   buttonNames.eq,
   buttonNames.xSquare,
@@ -340,8 +316,6 @@ export {
   buttonsSimpleUp,
   buttonsSimpleRight,
   buttonsNumbers,
-  nonHistory,
-  nonSubmit,
   resetableButtons,
   memoryButtons,
   answerWithOneOperand,
