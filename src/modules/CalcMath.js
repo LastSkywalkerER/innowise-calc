@@ -42,7 +42,11 @@ export default class СalcMath {
       (value.slice(1, value.length).indexOf(this.operator) + 1);
 
     if (this.operator && operatorPosition > 0) {
-      this.operand2 = this.checkMinus(value.slice(operatorPosition + this.operator.length));
+      if (value.slice(operatorPosition + this.operator.length) === '') {
+        this.operand2 = this.checkMinus(value.slice(0, operatorPosition));
+      } else {
+        this.operand2 = this.checkMinus(value.slice(operatorPosition + this.operator.length));
+      }
     } else {
       operatorPosition = value.length;
     }
@@ -68,18 +72,18 @@ export default class СalcMath {
     let curOperand2 = '';
     let curOperator = '';
 
-    if (operand1) {
+    if (operand1 !== undefined) {
       checkDot(operand1);
       curOperand1 = this.customRound(operand1);
       this.operand1 = curOperand1;
     }
-    if (operand2) {
+    if (operand2 !== undefined) {
       checkDot(operand2);
       curOperand2 = this.customRound(operand2);
       this.operand2 = curOperand2;
     }
 
-    if (operator) {
+    if (operator !== undefined) {
       curOperator = operator;
       this.operator = curOperator;
       this.actionFlag = true;
