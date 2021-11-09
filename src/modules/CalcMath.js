@@ -9,8 +9,6 @@ export default class СalcMath {
     this.commands = [];
     this.CommandToExecute = null;
     this.LastCommand = null;
-    this.lastExecutedCommand = null;
-    this.UsedCommands = new Map();
     this.operand1 = 0;
     this.operand2 = 0;
     this.input = input;
@@ -145,7 +143,6 @@ export default class СalcMath {
       if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
         this.dotFlag = false;
         this.CommandToExecute = button.Command;
-        // this.UsedCommands.set(button.renderText, button.Command);
         this.operator = button.renderText;
         this.actionFlag = true;
         this.render(button.renderText);
@@ -223,8 +220,7 @@ export default class СalcMath {
   unDo() {
     if (this.commands.length) {
       this.finalOperation = true;
-      this.lastExecutedCommand = this.commands.pop();
-      this.setOperands(this.lastExecutedCommand.unDo());
+      this.setOperands(this.commands.pop().unDo());
     }
   }
 
