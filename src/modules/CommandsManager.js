@@ -43,12 +43,13 @@ export default class CommandsManager {
     }
 
     if (answerWithTwoOperands.includes(button)) {
-      this.calculator.renderAction(button.renderText, button.Command);
+      this.calculator.renderAction(button);
       return;
     }
 
     if (answerWithOneOperand.includes(button)) {
-      //
+      this.calculator.submit();
+      this.calculator.executer(button.Command);
       return;
     }
 

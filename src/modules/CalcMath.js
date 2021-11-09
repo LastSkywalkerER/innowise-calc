@@ -96,19 +96,19 @@ export default class СalcMath {
     }
   }
 
-  renderAction(value, Command) {
+  renderAction(button) {
     this.errorReset();
 
     const initialSequence = () => {
       if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
         this.dotFlag = false;
-        this.CommandToExecute = Command;
-        this.UsedCommands.set(value, Command);
-        this.operator = value;
+        this.CommandToExecute = button.Command;
+        this.UsedCommands.set(button.renderText, button.Command);
+        this.operator = button.renderText;
         this.actionFlag = true;
-        this.render(value);
-      } else if (value === '-' && this.input.value === '') {
-        this.render(value);
+        this.render(button.renderText);
+      } else if (button.renderText === '-' && this.input.value === '') {
+        this.render(button.renderText);
       }
     };
 
@@ -182,33 +182,38 @@ export default class СalcMath {
     }
   }
 
-  submit() {
+  executer(Command) {
     this.getOperands();
 
-    const executer = (Command) => {
-      const command = new Command({
-        operand1: this.operand1,
-        operand2: this.operand2,
-        operator: this.operator,
-      });
-      try {
-        this.renderAnswer(command.execute());
-        this.commands.push(command);
-        this.LastCommand = this.CommandToExecute;
-      } catch (e) {
+    const command = new Command({
+      operand1: this.operand1,
+      operand2: this.operand2,
+      operator: this.operator,
+    });
+    try {
+      this.renderAnswer(command.execute());
+      this.commands.push(command);
+      this.LastCommand = this.CommandToExecute;
+    } catch (e) {
+      if (e.name === 'Error') {
         this.renderError(e);
+      } else {
+        // eslint-disable-next-line no-console
+        console.error(e);
       }
-    };
+    }
+  }
 
+  submit() {
     if (this.lastExecutedCommand) {
       this.lastExecutedCommand.execute();
       this.commands.push(this.lastExecutedCommand);
       this.lastExecutedCommand = null;
       this.LastCommand = this.UsedCommands.get(this.operator);
     } else if (this.finalOperation && this.LastCommand) {
-      executer(this.LastCommand);
+      this.executer(this.LastCommand);
     } else if (this.operator) {
-      executer(this.CommandToExecute);
+      this.executer(this.CommandToExecute);
     }
   }
 }
