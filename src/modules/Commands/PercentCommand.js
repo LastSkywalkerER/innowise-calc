@@ -5,10 +5,14 @@ export default class PercentCommand extends Command {
     if (this.operand2) {
       return {
         operand1: this.operand1,
-        operand2: this.subject.operand2 / 100,
+        operand2: this.operand2 / 100,
         operator: this.operator,
       };
     }
-    return {};
+    return {
+      operand1: this.operand1,
+      operand2: this.operand2,
+      operator: this.operator,
+    };
   }
 }

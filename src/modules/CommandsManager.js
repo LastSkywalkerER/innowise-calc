@@ -45,13 +45,12 @@ export default class CommandsManager {
     }
 
     if (memoryButtons.includes(button)) {
-      this.calculator.submit();
-      // this.calculator.setMemory();
+      this.calculator.setMemory(button);
       return;
     }
 
     if (buttonNames.eq === button) {
-      this.calculator.submit();
+      this.calculator.submit(true);
       return;
     }
 

@@ -23,6 +23,16 @@ export default class СalcMath {
   }
 
   // eslint-disable-next-line class-methods-use-this
+  getCommandByOperator(operator) {
+    return buttonNames[Object.keys(buttonNames).reduce((prev, curr) => {
+      if (buttonNames[curr].renderText === operator) {
+        return curr;
+      }
+      return prev;
+    })].Command;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   checkMinus(string) {
     return (string.slice(0, 1) !== '-' ? +string : -string.slice(1, string.length));
   }
@@ -56,30 +66,47 @@ export default class СalcMath {
       }
     };
 
-    let curOperator = operator;
+    let curOperand1 = '';
+    let curOperand2 = '';
+    let curOperator = '';
+
     if (operand1) {
       checkDot(operand1);
-      this.operand1 = this.customRound(operand1);
+      curOperand1 = this.customRound(operand1);
+      this.operand1 = curOperand1;
     }
     if (operand2) {
       checkDot(operand2);
-      this.operand2 = this.customRound(operand2);
+      curOperand2 = this.customRound(operand2);
+      this.operand2 = curOperand2;
     }
 
     if (operator) {
       curOperator = operator;
+      this.operator = curOperator;
       this.actionFlag = true;
+      this.CommandToExecute = this.getCommandByOperator(operator);
     } else {
-      curOperator = '';
       this.actionFlag = false;
     }
-    this.operator = curOperator;
 
-    this.input.value = `${this.operand1}${curOperator}${this.operand2}`;
+    this.input.value = `${curOperand1}${curOperator}${curOperand2}`;
   }
 
-  setMemory(value) {
-    this.memory += value;
+  setMemory(button) {
+    this.submit();
+    this.getOperands();
+
+    const command = new button.Command({
+      operand1: this.operand1,
+      operand2: this.operand2,
+      operator: this.operator,
+      memory: this.memory,
+    });
+    const result = command.execute(this.operand1);
+
+    this.memory = result.memory;
+    this.setOperands(result);
   }
 
   renderError(e) {
@@ -118,7 +145,7 @@ export default class СalcMath {
       if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
         this.dotFlag = false;
         this.CommandToExecute = button.Command;
-        this.UsedCommands.set(button.renderText, button.Command);
+        // this.UsedCommands.set(button.renderText, button.Command);
         this.operator = button.renderText;
         this.actionFlag = true;
         this.render(button.renderText);
@@ -190,6 +217,7 @@ export default class СalcMath {
     this.finalOperation = false;
     this.input.value = '';
     this.LastCommand = null;
+    this.CommandToExecute = null;
   }
 
   unDo() {
@@ -211,11 +239,11 @@ export default class СalcMath {
     try {
       this.setOperands(command.execute());
       this.commands.push(command);
-      this.LastCommand = this.CommandToExecute;
+      this.LastCommand = Command;
     } catch (e) {
       if (e.name === 'Error') {
         this.renderError(e);
-        console.error(e);
+        // console.error(e);
       } else {
         // eslint-disable-next-line no-console
         console.error(e);
@@ -223,16 +251,13 @@ export default class СalcMath {
     }
   }
 
-  submit() {
-    if (this.lastExecutedCommand) {
-      this.lastExecutedCommand.execute();
-      this.commands.push(this.lastExecutedCommand);
-      this.lastExecutedCommand = null;
-      this.LastCommand = this.UsedCommands.get(this.operator);
-    } else if (this.finalOperation && this.LastCommand) {
-      this.executer(this.LastCommand);
-    } else if (this.operator) {
+  submit(repeatable) {
+    // this.getOperands();
+    if (this.CommandToExecute) {
       this.executer(this.CommandToExecute);
+      this.CommandToExecute = null;
+    } else if (repeatable && this.LastCommand) {
+      this.executer(this.LastCommand);
     }
   }
 }
