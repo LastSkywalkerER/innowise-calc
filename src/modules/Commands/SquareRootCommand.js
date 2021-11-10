@@ -2,7 +2,7 @@ import Command from './Command';
 
 export default class SquareRootCommand extends Command {
   execute() {
-    if (this.operand1 <= 0) {
+    if (this.operand1 < 0) {
       throw Error('invalid operand under the root');
     }
     return {

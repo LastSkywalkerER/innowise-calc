@@ -5,7 +5,7 @@ export default class YRootCommand extends Command {
     if (this.operand1 === 0) {
       throw Error('try to devide by zero');
     }
-    if (this.operand2 <= 0) {
+    if (this.operand2 < 0) {
       throw Error('invalid operand under the root');
     }
     return {

@@ -1,325 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1636112412051" clover="3.2.0">
-  <project timestamp="1636112412052" name="All files">
-    <metrics statements="230" coveredstatements="138" conditionals="102" coveredconditionals="47" methods="47" coveredmethods="30" elements="379" coveredelements="215" complexity="0" loc="230" ncloc="230" packages="2" files="28" classes="28"/>
-    <package name="modules">
-      <metrics statements="98" coveredstatements="71" conditionals="52" coveredconditionals="27" methods="15" coveredmethods="12"/>
-      <file name="CalcMath.js" path="D:\ITfun\innowise-calc\src\modules\CalcMath.js">
-        <metrics statements="93" coveredstatements="66" conditionals="52" coveredconditionals="27" methods="15" coveredmethods="12"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="21" count="17" type="cond" truecount="1" falsecount="1"/>
-        <line num="25" count="11" type="stmt"/>
-        <line num="26" count="11" type="cond" truecount="1" falsecount="1"/>
-        <line num="30" count="11" type="cond" truecount="4" falsecount="0"/>
-        <line num="31" count="4" type="stmt"/>
-        <line num="33" count="7" type="stmt"/>
-        <line num="35" count="11" type="stmt"/>
-        <line num="39" count="7" type="cond" truecount="1" falsecount="1"/>
-        <line num="40" count="7" type="stmt"/>
-        <line num="42" count="7" type="cond" truecount="1" falsecount="1"/>
-        <line num="43" count="7" type="stmt"/>
-        <line num="46" count="7" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="60" count="30" type="cond" truecount="1" falsecount="1"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="67" count="22" type="stmt"/>
-        <line num="68" count="22" type="stmt"/>
-        <line num="69" count="22" type="cond" truecount="1" falsecount="1"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="72" count="22" type="stmt"/>
-        <line num="76" count="4" type="stmt"/>
-        <line num="78" count="4" type="stmt"/>
-        <line num="79" count="4" type="cond" truecount="4" falsecount="1"/>
-        <line num="80" count="4" type="stmt"/>
-        <line num="81" count="4" type="stmt"/>
-        <line num="82" count="4" type="stmt"/>
-        <line num="83" count="4" type="stmt"/>
-        <line num="84" count="4" type="stmt"/>
-        <line num="85" count="4" type="stmt"/>
-        <line num="86" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="87" count="0" type="stmt"/>
-        <line num="91" count="4" type="cond" truecount="3" falsecount="1"/>
-        <line num="93" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="106" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="107" count="0" type="stmt"/>
-        <line num="108" count="0" type="stmt"/>
-        <line num="109" count="0" type="stmt"/>
-        <line num="112" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="113" count="4" type="stmt"/>
-        <line num="119" count="18" type="cond" truecount="2" falsecount="0"/>
-        <line num="120" count="2" type="stmt"/>
-        <line num="123" count="16" type="stmt"/>
-        <line num="127" count="4" type="stmt"/>
-        <line num="128" count="4" type="stmt"/>
-        <line num="130" count="4" type="stmt"/>
-        <line num="131" count="4" type="stmt"/>
-        <line num="132" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="133" count="4" type="stmt"/>
-        <line num="135" count="0" type="stmt"/>
-        <line num="137" count="4" type="stmt"/>
-        <line num="138" count="4" type="stmt"/>
-        <line num="142" count="11" type="stmt"/>
-        <line num="143" count="11" type="stmt"/>
-        <line num="144" count="11" type="stmt"/>
-        <line num="145" count="11" type="stmt"/>
-        <line num="146" count="11" type="stmt"/>
-        <line num="147" count="11" type="stmt"/>
-        <line num="148" count="11" type="stmt"/>
-        <line num="149" count="11" type="stmt"/>
-        <line num="150" count="11" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="155" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="156" count="0" type="stmt"/>
-        <line num="161" count="4" type="stmt"/>
-        <line num="163" count="4" type="cond" truecount="2" falsecount="2"/>
-        <line num="164" count="0" type="stmt"/>
-        <line num="171" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="172" count="4" type="stmt"/>
+<coverage generated="1636560891434" clover="3.2.0">
+  <project timestamp="1636560891434" name="All files">
+    <metrics statements="66" coveredstatements="49" conditionals="31" coveredconditionals="29" methods="37" coveredmethods="22" elements="134" coveredelements="100" complexity="0" loc="66" ncloc="66" packages="2" files="15" classes="15"/>
+    <package name="Commands">
+      <metrics statements="53" coveredstatements="36" conditionals="24" coveredconditionals="22" methods="29" coveredmethods="14"/>
+      <file name="Command.js" path="D:\ITfan\innowise-calc\src\modules\Commands\Command.js">
+        <metrics statements="8" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="1"/>
+        <line num="8" count="66" type="stmt"/>
+        <line num="9" count="66" type="stmt"/>
+        <line num="10" count="66" type="stmt"/>
+        <line num="11" count="66" type="stmt"/>
+        <line num="13" count="66" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
       </file>
-      <file name="buttonNames.js" path="D:\ITfun\innowise-calc\src\modules\buttonNames.js">
-        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="165" count="1" type="stmt"/>
-        <line num="182" count="1" type="stmt"/>
-        <line num="187" count="1" type="stmt"/>
-        <line num="194" count="1" type="stmt"/>
+      <file name="CubeRootCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\CubeRootCommand.js">
+        <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="1"/>
+        <line num="5" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+      </file>
+      <file name="DevCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\DevCommand.js">
+        <metrics statements="4" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="1"/>
+        <line num="5" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+      </file>
+      <file name="EInxCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\EInxCommand.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="5" count="7" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="MinusCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\MinusCommand.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="MultCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\MultCommand.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="PlusCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\PlusCommand.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="SquareRootCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\SquareRootCommand.js">
+        <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="1"/>
+        <line num="5" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+      </file>
+      <file name="TenInXCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\TenInXCommand.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="XCubeCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\XCubeCommand.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="XFactCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\XFactCommand.js">
+        <metrics statements="9" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="1"/>
+        <line num="6" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+      </file>
+      <file name="XInYCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\XInYCommand.js">
+        <metrics statements="4" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="1"/>
+        <line num="5" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+      </file>
+      <file name="XSquareCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\XSquareCommand.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="YRootCommand.js" path="D:\ITfan\innowise-calc\src\modules\Commands\YRootCommand.js">
+        <metrics statements="6" coveredstatements="4" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
+        <line num="5" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="modules.Commands">
-      <metrics statements="132" coveredstatements="67" conditionals="50" coveredconditionals="20" methods="32" coveredmethods="18"/>
-      <file name="ButtonsCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\ButtonsCommand.js">
-        <metrics statements="34" coveredstatements="26" conditionals="24" coveredconditionals="15" methods="4" coveredmethods="4"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="51" count="11" type="stmt"/>
-        <line num="52" count="11" type="cond" truecount="2" falsecount="2"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="56" count="11" type="cond" truecount="1" falsecount="1"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="59" count="11" type="stmt"/>
-        <line num="63" count="33" type="stmt"/>
-        <line num="64" count="1122" type="cond" truecount="2" falsecount="0"/>
-        <line num="65" count="33" type="stmt"/>
-        <line num="67" count="1089" type="stmt"/>
-        <line num="70" count="33" type="cond" truecount="2" falsecount="0"/>
-        <line num="71" count="18" type="cond" truecount="1" falsecount="1"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="74" count="18" type="cond" truecount="1" falsecount="1"/>
-        <line num="75" count="18" type="stmt"/>
-        <line num="76" count="18" type="stmt"/>
-        <line num="80" count="15" type="cond" truecount="2" falsecount="0"/>
-        <line num="81" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="82" count="4" type="stmt"/>
-        <line num="83" count="4" type="stmt"/>
-        <line num="87" count="11" type="cond" truecount="1" falsecount="1"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="92" count="11" type="cond" truecount="1" falsecount="1"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="97" count="11" type="stmt"/>
-        <line num="99" count="11" type="cond" truecount="1" falsecount="1"/>
-        <line num="100" count="0" type="stmt"/>
-      </file>
-      <file name="Command.js" path="D:\ITfun\innowise-calc\src\modules\Commands\Command.js">
-        <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="1"/>
-        <line num="3" count="31" type="stmt"/>
-        <line num="5" count="31" type="cond" truecount="1" falsecount="1"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-      </file>
-      <file name="CubeRootCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\CubeRootCommand.js">
-        <metrics statements="7" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-      </file>
-      <file name="DevCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\DevCommand.js">
-        <metrics statements="11" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-      </file>
-      <file name="DotCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\DotCommand.js">
-        <metrics statements="3" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-      </file>
-      <file name="EInxCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\EInxCommand.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="EqualCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\EqualCommand.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="4" type="stmt"/>
-      </file>
-      <file name="MCCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\MCCommand.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-      </file>
-      <file name="MMinusCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\MMinusCommand.js">
-        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-      </file>
-      <file name="MPlusCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\MPlusCommand.js">
-        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-      </file>
-      <file name="MRCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\MRCommand.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-      </file>
-      <file name="MinusCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\MinusCommand.js">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-      </file>
-      <file name="MultCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\MultCommand.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-      </file>
-      <file name="OneDevXCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\OneDevXCommand.js">
-        <metrics statements="14" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-      </file>
-      <file name="PercentCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\PercentCommand.js">
-        <metrics statements="3" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="7" count="0" type="stmt"/>
-      </file>
-      <file name="PlusCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\PlusCommand.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-      </file>
-      <file name="PlusMinusCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\PlusMinusCommand.js">
-        <metrics statements="6" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-      </file>
-      <file name="ResetCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\ResetCommand.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="11" type="stmt"/>
-      </file>
-      <file name="SquareRootCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\SquareRootCommand.js">
-        <metrics statements="7" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-      </file>
-      <file name="TenInXCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\TenInXCommand.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="UnDoCommnd.js" path="D:\ITfun\innowise-calc\src\modules\Commands\UnDoCommnd.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-      </file>
-      <file name="XCubeCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\XCubeCommand.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="XFactCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\XFactCommand.js">
-        <metrics statements="10" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="5" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-      </file>
-      <file name="XInYCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\XInYCommand.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-      </file>
-      <file name="XSquareCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\XSquareCommand.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="YRootCommand.js" path="D:\ITfun\innowise-calc\src\modules\Commands\YRootCommand.js">
-        <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+    <package name="Commands.tests">
+      <metrics statements="13" coveredstatements="13" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="8"/>
+      <file name="CommandsTester.js" path="D:\ITfan\innowise-calc\src\modules\Commands.tests\CommandsTester.js">
+        <metrics statements="13" coveredstatements="13" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="8"/>
+        <line num="9" count="13" type="stmt"/>
+        <line num="10" count="13" type="stmt"/>
+        <line num="21" count="52" type="stmt"/>
+        <line num="36" count="66" type="stmt"/>
+        <line num="37" count="66" type="stmt"/>
+        <line num="41" count="13" type="stmt"/>
+        <line num="42" count="52" type="stmt"/>
+        <line num="43" count="52" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="14" type="stmt"/>
+        <line num="46" count="14" type="stmt"/>
+        <line num="49" count="38" type="cond" truecount="4" falsecount="0"/>
+        <line num="50" count="32" type="stmt"/>
+        <line num="53" count="6" type="stmt"/>
       </file>
     </package>
   </project>
