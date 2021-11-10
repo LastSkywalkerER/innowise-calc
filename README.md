@@ -65,3 +65,25 @@
   - src / main project files
     - modules / project modules
       - Commands / calculator commands
+      - Commands.tests / tests of main functions
+
+<h1 align="center">About test</h1>
+
+Describtion of Command.test file
+
+```JavaScript
+import Command from '../Commands/Command'; //import of Command for test
+import CommandsTester from './CommandsTester'; //import custom tester
+
+const commandTester = new CommandsTester(Command); //get an tester object
+
+commandTester.fillTestValues(operand1, operand2, operator, answerInOperand1); // add values for test command
+
+commandTester.test(stringFromThrownError, precisionForFloatNumbers); // run test
+```
+
+run tests:
+
+```
+npm run test
+```
