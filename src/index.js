@@ -75,6 +75,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 buttons.addEventListener('mousedown', (event) => {
+  event.preventDefault();
   if (event.target.hasAttribute('calcAct')) {
     event.target.classList.add('clicked-button');
     setTimeout(() => {

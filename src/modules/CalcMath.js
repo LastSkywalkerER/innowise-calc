@@ -36,6 +36,7 @@ export default class СalcMath {
   }
 
   setMemory(button) {
+    this.errorReset();
     this.submit();
     const {
       operand1,
@@ -96,7 +97,7 @@ export default class СalcMath {
 
   errorReset() {
     if (this.operandsManager.checkError()) {
-      this.OperandsManager.setState({
+      this.operandsManager.setState({
         errorOccured: false,
       });
       this.reset();
@@ -168,7 +169,6 @@ export default class СalcMath {
       operand2: 0,
       dotFlag: false,
       actionFlag: false,
-      errorOccured: false,
     });
     this.finalOperation = false;
     this.input.value = '';
