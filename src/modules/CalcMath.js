@@ -1,23 +1,28 @@
 import {
   buttonNames,
 } from './buttonNames';
+import OperandsManager from './OperandsManager';
+
+const initialState = {
+  operator: '',
+  operand1: 0,
+  operand2: 0,
+  dotFlag: false,
+  actionFlag: false,
+  errorOccured: false,
+  memory: 0,
+};
+
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 export default class СalcMath {
   constructor(input) {
-    this.operator = '';
+    this.operandsManager = new OperandsManager(initialState);
     this.commands = [];
     this.CommandToExecute = null;
     this.LastCommand = null;
-    this.operand1 = 0;
-    this.operand2 = 0;
     this.input = input;
-    this.dotFlag = false;
-    this.actionFlag = false;
-    this.minusBeforeOperand2 = false;
-    this.errorOccured = false;
     this.finalOperation = false;
-    this.memory = 0;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -30,108 +35,70 @@ export default class СalcMath {
     })].Command;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  checkMinus(string) {
-    return (string.slice(0, 1) !== '-' ? +string : -string.slice(1, string.length));
-  }
-
-  getOperands() {
-    const value = String(this.input.value);
-    let operatorPosition = value.slice(0, 1) !== '-' ?
-      value.indexOf(this.operator) :
-      (value.slice(1, value.length).indexOf(this.operator) + 1);
-
-    if (this.operator && operatorPosition > 0) {
-      if (value.slice(operatorPosition + this.operator.length) === '') {
-        this.operand2 = this.checkMinus(value.slice(0, operatorPosition));
-      } else {
-        this.operand2 = this.checkMinus(value.slice(operatorPosition + this.operator.length));
-      }
-    } else {
-      operatorPosition = value.length;
-    }
-    this.operand1 = this.checkMinus(value.slice(0, operatorPosition));
-  }
-
-  setOperands({
-    operand1,
-    operand2,
-    operator,
-  }) {
-    this.errorReset();
-
-    const checkDot = (operand) => {
-      if (!String(operand).split('').includes('.')) {
-        this.dotFlag = false;
-      } else {
-        this.dotFlag = true;
-      }
-    };
-
-    let curOperand1 = '';
-    let curOperand2 = '';
-    let curOperator = '';
-
-    if (operand1 || operand1 === 0) {
-      checkDot(operand1);
-      curOperand1 = this.customRound(operand1);
-      this.operand1 = curOperand1;
-    }
-    if (operand2) {
-      checkDot(operand2);
-      curOperand2 = this.customRound(operand2);
-      this.operand2 = curOperand2;
-    }
-
-    if (operator) {
-      curOperator = operator;
-      this.operator = curOperator;
-      this.actionFlag = true;
-      this.CommandToExecute = this.getCommandByOperator(operator);
-    } else {
-      this.actionFlag = false;
-    }
-
-    this.input.value = `${curOperand1}${curOperator}${curOperand2}`;
-  }
-
   setMemory(button) {
     this.submit();
-    this.getOperands();
+    const {
+      operand1,
+      operand2,
+      operator,
+      memory,
+    } = this.operandsManager.getOperands(this.input.value);
 
     const command = new button.Command({
-      operand1: this.operand1,
-      operand2: this.operand2,
-      operator: this.operator,
-      memory: this.memory,
+      operand1,
+      operand2,
+      operator,
+      memory,
     });
     let result = {};
 
     try {
-      result = command.execute(this.operand1);
+      result = command.execute(operand1);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
     }
 
     if (result.memory || result.memory === 0) {
-      this.memory = result.memory;
+      this.operandsManager.setState({
+        memory: result.memory,
+      });
     }
 
     if (result.operand1 || result.operand1 === 0) {
-      this.setOperands(result);
+      this.renderOperands(result);
     }
   }
 
+  renderOperands(state) {
+    this.errorReset();
+
+    const {
+      curOperand1,
+      curOperand2,
+      curOperator,
+    } = this.operandsManager.setOperands(state);
+
+    if (state.operator) {
+      this.CommandToExecute = this.getCommandByOperator(state.operator);
+    }
+
+    this.input.value = `${curOperand1}${curOperator}${curOperand2}`;
+  }
+
   renderError(e) {
-    this.errorOccured = true;
+    this.operandsManager.setState({
+      errorOccured: true,
+    });
     this.reset();
     this.input.value = e;
   }
 
   errorReset() {
-    if (this.errorOccured) {
-      this.errorOccured = false;
+    if (this.operandsManager.checkError()) {
+      this.OperandsManager.setState({
+        errorOccured: false,
+      });
       this.reset();
     }
   }
@@ -143,8 +110,10 @@ export default class СalcMath {
       this.reset();
     }
     if (value === buttonNames.dot.renderText) {
-      if (!this.dotFlag) {
-        this.dotFlag = true;
+      if (!this.operandsManager.getDotFlag()) {
+        this.operandsManager.setState({
+          dotFlag: true,
+        });
         this.input.value += value;
       }
     } else {
@@ -154,79 +123,53 @@ export default class СalcMath {
 
   renderAction(button) {
     this.errorReset();
+    const {
+      operand1,
+      operator,
+      actionFlag,
+    } = this.operandsManager.getOperands(this.input.value);
 
     const initialSequence = () => {
       if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
-        this.dotFlag = false;
         this.CommandToExecute = button.Command;
-        this.operator = button.renderText;
-        this.actionFlag = true;
+        this.operandsManager.setState({
+          operator: button.renderText,
+          actionFlag: true,
+          dotFlag: false,
+        });
         this.render(button.renderText);
       } else if (button.renderText === '-' && this.input.value === '') {
         this.render(button.renderText);
       }
     };
 
-    if (this.input.value.indexOf(this.operator) === (this.input.value.length - 1) &&
-      this.actionFlag) {
-      // добавляет минус у второго операнда после оператора О_о
-      // if (!this.minusBeforeOperand2 && value === '-') {
-      //   this.minusBeforeOperand2 = true;
-      //   this.render(value);
-      //   return;
-      // }
-      this.minusBeforeOperand2 = false;
-      this.getOperands();
-      this.input.value = this.operand1;
+    if (this.input.value.indexOf(operator) === (this.input.value.length - 1) &&
+      actionFlag) {
+      this.input.value = operand1;
       initialSequence();
       return;
     }
 
-    if (this.actionFlag) {
+    if (actionFlag) {
       this.submit();
       initialSequence();
       return;
     }
 
-    if (!this.actionFlag) {
+    if (!actionFlag) {
       initialSequence();
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  customRound(value) {
-    if (String(value).indexOf('.') > 0) {
-      const precisionNumber = 5;
-      let numberWrongZero = 0;
-      let numberWrongNine = 0;
-      let lastChar = String(value).charAt(String(value).length - 1);
-
-      for (let i = String(value).length - 2; i > String(value).indexOf('.'); i--) {
-        if (String(value).charAt(i) === '0' && lastChar === '0') {
-          numberWrongZero += 1;
-        }
-        if (String(value).charAt(i) === '9' && lastChar === '9') {
-          numberWrongNine += 1;
-        }
-
-        lastChar = String(value).charAt(i);
-      }
-
-      if (numberWrongZero > precisionNumber || numberWrongNine > precisionNumber) {
-        return this.checkMinus(value
-          .toPrecision(precisionNumber));
-      }
-    }
-    return value;
-  }
-
   reset() {
-    this.operator = '';
-    this.operand1 = 0;
-    this.operand2 = 0;
-    this.dotFlag = false;
-    this.minusBeforeOperand2 = false;
-    this.actionFlag = false;
+    this.operandsManager.setState({
+      operator: '',
+      operand1: 0,
+      operand2: 0,
+      dotFlag: false,
+      actionFlag: false,
+      errorOccured: false,
+    });
     this.finalOperation = false;
     this.input.value = '';
     this.LastCommand = null;
@@ -236,20 +179,16 @@ export default class СalcMath {
   unDo() {
     if (this.commands.length) {
       this.finalOperation = true;
-      this.setOperands(this.commands.pop().unDo());
+      this.renderOperands(this.commands.pop().unDo());
     }
   }
 
   executer(Command) {
-    this.getOperands();
+    const state = this.operandsManager.getOperands(this.input.value);
 
-    const command = new Command({
-      operand1: this.operand1,
-      operand2: this.operand2,
-      operator: this.operator,
-    });
+    const command = new Command(state);
     try {
-      this.setOperands(command.execute());
+      this.renderOperands(command.execute());
       this.commands.push(command);
       this.LastCommand = Command;
     } catch (e) {
@@ -264,7 +203,6 @@ export default class СalcMath {
   }
 
   submit(repeatable) {
-    // this.getOperands();
     if (this.CommandToExecute) {
       this.executer(this.CommandToExecute);
       this.CommandToExecute = null;
