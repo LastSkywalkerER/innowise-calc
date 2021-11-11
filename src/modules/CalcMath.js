@@ -183,8 +183,8 @@ export default class СalcMath {
     }
   }
 
-  executer(Command) {
-    const state = this.operandsManager.getOperands(this.input.value);
+  executer(Command, disableHistory) {
+    const state = this.operandsManager.getOperands(this.input.value, disableHistory);
 
     const command = new Command(state);
     try {

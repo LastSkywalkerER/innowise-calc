@@ -40,7 +40,7 @@ export default class CommandsManager {
     }
 
     if (changeOneOperand.includes(button)) {
-      this.calculator.executer(button.Command);
+      this.calculator.executer(button.Command, true);
       return;
     }
 

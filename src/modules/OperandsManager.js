@@ -8,7 +8,7 @@ export default class OperandsManager {
     return (string.slice(0, 1) !== '-' ? +string : -string.slice(1, string.length));
   }
 
-  getOperands(value) {
+  getOperands(value, disableHistory) {
     let operatorPosition = value.slice(0, 1) !== '-' ?
       value.indexOf(this.state.operator) :
       (value.slice(1, value.length).indexOf(this.state.operator) + 1);
@@ -21,6 +21,10 @@ export default class OperandsManager {
           this.checkMinus(value.slice(operatorPosition + this.state.operator.length));
       }
     } else {
+      if (disableHistory) {
+        this.state.operand2 = '';
+        this.state.operator = '';
+      }
       operatorPosition = value.length;
     }
     this.state.operand1 = this.checkMinus(value.slice(0, operatorPosition));
