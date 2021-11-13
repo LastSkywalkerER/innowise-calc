@@ -38,7 +38,7 @@ class CalculatorApp {
 
     this.drawer.bindKeyboard((key) => {
       const button = buttonNames.getButtonByOperator(key);
-      this.commandsManager.execute(button.name);
+      // this.commandsManager.execute(button.name);
       return button;
     });
   }

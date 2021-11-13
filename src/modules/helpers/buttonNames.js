@@ -20,12 +20,14 @@ import MPlusCommand from '../Commands/MPlusCommand';
 import MRCommand from '../Commands/MRCommand';
 
 const buttonNames = {
-  getButtonByOperator: (operator) => this[Object.keys(this).reduce((prev, curr) => {
-    if (this[curr].buttonText === operator) {
-      return curr;
-    }
-    return prev;
-  }, {})],
+  getButtonByOperator(operator) {
+    return this[Object.keys(this).reduce((prev, curr) => {
+      if (this[curr].buttonText === operator) {
+        return curr;
+      }
+      return prev;
+    }, {})];
+  },
   mc: {
     name: 'mc',
     buttonText: 'mc',
