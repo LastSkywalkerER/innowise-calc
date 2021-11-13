@@ -1,25 +1,31 @@
-import DevCommand from './Commands/DevCommand';
-import MultCommand from './Commands/MultCommand';
-import MinusCommand from './Commands/MinusCommand';
-import PlusCommand from './Commands/PlusCommand';
-import PlusMinusCommand from './Commands/PlusMinusCommand';
-import PercentCommand from './Commands/PercentCommand';
-import XSquareCommand from './Commands/XSquareCommand';
-import XCubeCommand from './Commands/XCubeCommand';
-import XInYCommand from './Commands/XInYCommand';
-import EInxCommand from './Commands/EInxCommand';
-import TenInXCommand from './Commands/TenInXCommand';
-import OneDevXCommand from './Commands/OneDevXCommand';
-import SquareRootCommand from './Commands/SquareRootCommand';
-import CubeRootCommand from './Commands/CubeRootCommand';
-import YRootCommand from './Commands/YRootCommand';
-import XFactCommand from './Commands/XFactCommand';
-import MCCommand from './Commands/MCCommand';
-import MMinusCommand from './Commands/MMinusCommand';
-import MPlusCommand from './Commands/MPlusCommand';
-import MRCommand from './Commands/MRCommand';
+import DevCommand from '../Commands/DevCommand';
+import MultCommand from '../Commands/MultCommand';
+import MinusCommand from '../Commands/MinusCommand';
+import PlusCommand from '../Commands/PlusCommand';
+import PlusMinusCommand from '../Commands/PlusMinusCommand';
+import PercentCommand from '../Commands/PercentCommand';
+import XSquareCommand from '../Commands/XSquareCommand';
+import XCubeCommand from '../Commands/XCubeCommand';
+import XInYCommand from '../Commands/XInYCommand';
+import EInxCommand from '../Commands/EInxCommand';
+import TenInXCommand from '../Commands/TenInXCommand';
+import OneDevXCommand from '../Commands/OneDevXCommand';
+import SquareRootCommand from '../Commands/SquareRootCommand';
+import CubeRootCommand from '../Commands/CubeRootCommand';
+import YRootCommand from '../Commands/YRootCommand';
+import XFactCommand from '../Commands/XFactCommand';
+import MCCommand from '../Commands/MCCommand';
+import MMinusCommand from '../Commands/MMinusCommand';
+import MPlusCommand from '../Commands/MPlusCommand';
+import MRCommand from '../Commands/MRCommand';
 
 const buttonNames = {
+  getButtonByOperator: (operator) => this[Object.keys(this).reduce((prev, curr) => {
+    if (this[curr].buttonText === operator) {
+      return curr;
+    }
+    return prev;
+  }, {})],
   mc: {
     name: 'mc',
     buttonText: 'mc',

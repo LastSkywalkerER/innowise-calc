@@ -1,7 +1,7 @@
 import {
   buttonNames,
-} from './buttonNames';
-import OperandsManager from './OperandsManager';
+} from './helpers/buttonNames';
+import OperandsManager from './helpers/OperandsManager';
 
 const initialState = {
   operator: '',
