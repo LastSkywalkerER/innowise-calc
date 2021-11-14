@@ -1,4 +1,6 @@
-import changeTheme from './modules/changeTheme';
+import ChangeTheme from './modules/ChangeTheme';
+import lightTheme from './modules/helpers/lightTheme';
+import darkTheme from './modules/helpers/darkTheme';
 import RenderButtons from './modules/drawers/RenderButtons';
 import CommandsManager from './modules/helpers/CommandsManager';
 import СalcMath from './modules/CalcMath';
@@ -20,10 +22,13 @@ class CalculatorApp {
     this.calculator = new СalcMath();
     this.container = new CommandsContainer();
     this.commandsManager = new CommandsManager(this.calculator);
+    this.changeTheme = new ChangeTheme(document.querySelector('.theme-toggler input[type=checkbox]'));
   }
 
   start() {
-    changeTheme();
+    this.changeTheme.addTheme('dark', darkTheme);
+    this.changeTheme.addTheme('light', lightTheme);
+    this.changeTheme.start();
 
     this.drawer.renderLayout((event) => {
       if (event.target.hasAttribute('calcAct')) {
