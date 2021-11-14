@@ -17,7 +17,7 @@ export default class OperandsManager {
     } = this.getState();
     if (operator) {
       this.setState({
-        operand2: value === '.' ? `${operand2}${value}` : this.checkMinus(`${operand2}${value}`),
+        operand2: value === '.' || value === '0' ? `${operand2}${value}` : this.checkMinus(`${operand2}${value}`),
       });
     } else {
       this.setState({

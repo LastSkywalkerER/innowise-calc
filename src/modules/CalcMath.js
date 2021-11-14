@@ -7,7 +7,7 @@ import CommandsContainer from './helpers/CommandsContainer';
 const initialState = {
   operator: '',
   operand1: '',
-  operand2: 0,
+  operand2: '',
   errorOccured: undefined,
 };
 
