@@ -2,37 +2,25 @@ import {
   buttonNames,
 } from './helpers/buttonNames';
 import OperandsManager from './helpers/OperandsManager';
+import CommandsContainer from './helpers/CommandsContainer';
 
 const initialState = {
   operator: '',
-  operand1: 0,
+  operand1: '',
   operand2: 0,
-  dotFlag: false,
-  actionFlag: false,
-  errorOccured: false,
-  memory: 0,
+  errorOccured: undefined,
 };
 
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 export default class СalcMath {
-  constructor(input) {
+  constructor() {
     this.operandsManager = new OperandsManager(initialState);
-    this.commands = [];
+    this.commands = new CommandsContainer();
+    this.dotFlag = false;
+    this.memory = 0;
     this.CommandToExecute = null;
-    this.LastCommand = null;
-    this.input = input;
     this.finalOperation = false;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  getCommandByOperator(operator) {
-    return buttonNames[Object.keys(buttonNames).reduce((prev, curr) => {
-      if (buttonNames[curr].renderText === operator) {
-        return curr;
-      }
-      return prev;
-    })].Command;
   }
 
   setMemory(button) {
@@ -42,14 +30,13 @@ export default class СalcMath {
       operand1,
       operand2,
       operator,
-      memory,
-    } = this.operandsManager.getOperands(this.input.value);
+    } = this.operandsManager.getState();
 
     const command = new button.Command({
       operand1,
       operand2,
       operator,
-      memory,
+      memory: this.memory,
     });
     let result = {};
 
@@ -61,38 +48,23 @@ export default class СalcMath {
     }
 
     if (result.memory || result.memory === 0) {
-      this.operandsManager.setState({
-        memory: result.memory,
-      });
+      this.memory = result.memory;
     }
 
     if (result.operand1 || result.operand1 === 0) {
-      this.renderOperands(result);
+      this.operandsManager.setState({
+        operand1: result.operand1,
+        operand2: result.operand2,
+        operator: result.operator,
+      });
     }
-  }
-
-  renderOperands(state) {
-    this.errorReset();
-
-    const {
-      curOperand1,
-      curOperand2,
-      curOperator,
-    } = this.operandsManager.setOperands(state);
-
-    if (state.operator) {
-      this.CommandToExecute = this.getCommandByOperator(state.operator);
-    }
-
-    this.input.value = `${curOperand1}${curOperator}${curOperand2}`;
   }
 
   renderError(e) {
-    this.operandsManager.setState({
-      errorOccured: true,
-    });
     this.reset();
-    this.input.value = e;
+    this.operandsManager.setState({
+      errorOccured: e,
+    });
   }
 
   errorReset() {
@@ -104,93 +76,116 @@ export default class СalcMath {
     }
   }
 
-  render(value) {
+  renderOutput(value) {
     this.errorReset();
     this.finalOperation = false;
-    if (this.input.value === 'Infinity') {
+
+    const {
+      operand1,
+    } = this.operandsManager.getState();
+
+    if (operand1 === Infinity) {
       this.reset();
     }
     if (value === buttonNames.dot.renderText) {
-      if (!this.operandsManager.getDotFlag()) {
-        this.operandsManager.setState({
-          dotFlag: true,
-        });
-        this.input.value += value;
+      if (!this.dotFlag) {
+        this.dotFlag = true;
+        this.operandsManager.composeOutput(value);
       }
     } else {
-      this.input.value += value;
+      this.operandsManager.composeOutput(value);
     }
+  }
+
+  checkOperands({
+    operand1,
+    operand2,
+    operator,
+  }) {
+    const checkDot = (operand) => {
+      if (!String(operand).split('').includes('.')) {
+        this.dotFlag = false;
+      } else {
+        this.dotFlag = true;
+      }
+    };
+
+    if (operator) {
+      this.CommandToExecute = buttonNames.getButtonByOperator(operator).Command;
+    }
+
+    if (operand1 || operand1 === 0) {
+      checkDot(operand1);
+    }
+    if (operand2) {
+      checkDot(operand2);
+    }
+
+    this.operandsManager.setState({
+      operand1: operand1 || 0,
+      operand2: operand2 || 0,
+      operator: operator || '',
+    });
   }
 
   renderAction(button) {
     this.errorReset();
+    this.finalOperation = false;
     const {
       operand1,
+      operand2,
       operator,
-      actionFlag,
-    } = this.operandsManager.getOperands(this.input.value);
+    } = this.operandsManager.getState();
 
     const initialSequence = () => {
-      if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
+      if (operand1 !== '' && operand1 !== '-' && operand1 !== Infinity) {
         this.CommandToExecute = button.Command;
         this.operandsManager.setState({
           operator: button.renderText,
-          actionFlag: true,
-          dotFlag: false,
         });
-        this.render(button.renderText);
-      } else if (button.renderText === '-' && this.input.value === '') {
-        this.render(button.renderText);
+        this.dotFlag = false;
+      } else if (button.renderText === '-' && !operand1) {
+        this.renderOutput(button.renderText);
       }
     };
 
-    if (this.input.value.indexOf(operator) === (this.input.value.length - 1) &&
-      actionFlag) {
-      this.input.value = operand1;
-      initialSequence();
-      return;
-    }
-
-    if (actionFlag) {
+    if (operand2 && operator) {
       this.submit();
       initialSequence();
       return;
     }
 
-    if (!actionFlag) {
+    if (!operator || (!operand2 && operator)) {
       initialSequence();
     }
   }
 
   reset() {
-    this.operandsManager.setState({
-      operator: '',
-      operand1: 0,
-      operand2: 0,
-      dotFlag: false,
-      actionFlag: false,
-    });
+    this.operandsManager.setState(initialState);
+    this.dotFlag = false;
     this.finalOperation = false;
-    this.input.value = '';
-    this.LastCommand = null;
     this.CommandToExecute = null;
   }
 
   unDo() {
-    if (this.commands.length) {
+    if (this.commands.getLastCommand()) {
       this.finalOperation = true;
-      this.renderOperands(this.commands.pop().unDo());
+      this.checkOperands(this.commands.popCommand().executedCommand.unDo());
     }
   }
 
   executer(Command, disableHistory) {
-    const state = this.operandsManager.getOperands(this.input.value, disableHistory);
+    const state = this.operandsManager.getState(disableHistory);
 
-    const command = new Command(state);
+    const executedCommand = new Command(state);
     try {
-      this.renderOperands(command.execute());
-      this.commands.push(command);
-      this.LastCommand = Command;
+      const output = executedCommand.execute();
+      this.checkOperands(output);
+
+      this.commands.pushCommand({
+        executedCommand,
+        Command,
+      });
     } catch (e) {
       if (e.name === 'Error') {
         this.renderError(e);
@@ -202,12 +197,24 @@ export default class СalcMath {
     }
   }
 
+  setLastOperands() {
+    const {
+      operand2,
+      operator,
+    } = this.commands.getLastCommand().executedCommand;
+    this.operandsManager.setState({
+      operand2,
+      operator,
+    });
+    return this.commands.getLastCommand().Command;
+  }
+
   submit(repeatable) {
     if (this.CommandToExecute) {
       this.executer(this.CommandToExecute);
       this.CommandToExecute = null;
-    } else if (repeatable && this.LastCommand) {
-      this.executer(this.LastCommand);
+    } else if (repeatable && this.commands.getLastCommand()) {
+      this.executer(this.setLastOperands());
     }
   }
 }

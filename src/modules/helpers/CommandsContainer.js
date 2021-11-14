@@ -3,11 +3,21 @@ export default class CommandsContainer {
     this.commandsCollection = [];
   }
 
+  getLastCommand() {
+    return this.commandsCollection[this.commandsCollection.length - 1];
+  }
+
   popCommand() {
     return this.commandsCollection.pop();
   }
 
-  pushCommand(command) {
-    this.commandsCollection.push(command);
+  pushCommand({
+    executedCommand,
+    Command,
+  }) {
+    this.commandsCollection.push({
+      executedCommand,
+      Command,
+    });
   }
 }

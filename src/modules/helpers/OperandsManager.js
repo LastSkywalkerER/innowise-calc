@@ -1,6 +1,7 @@
 export default class OperandsManager {
   constructor(initialState) {
     this.state = initialState;
+    this.listeners = [];
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -8,32 +9,25 @@ export default class OperandsManager {
     return (string.slice(0, 1) !== '-' ? +string : -string.slice(1, string.length));
   }
 
-  getOperands(value, disableHistory) {
-    let operatorPosition = value.slice(0, 1) !== '-' ?
-      value.indexOf(this.state.operator) :
-      (value.slice(1, value.length).indexOf(this.state.operator) + 1);
-
-    if (this.state.operator && operatorPosition > 0) {
-      if (value.slice(operatorPosition + this.state.operator.length) === '') {
-        this.state.operand2 = this.checkMinus(value.slice(0, operatorPosition));
-      } else {
-        this.state.operand2 =
-          this.checkMinus(value.slice(operatorPosition + this.state.operator.length));
-      }
+  composeOutput(value) {
+    const {
+      operand1,
+      operand2,
+      operator,
+    } = this.getState();
+    if (operator) {
+      this.setState({
+        operand2: value === '.' ? `${operand2}${value}` : this.customRound(this.checkMinus(`${operand2}${value}`)),
+      });
     } else {
-      if (disableHistory) {
-        this.state.operand2 = '';
-        this.state.operator = '';
-      }
-      operatorPosition = value.length;
+      this.setState({
+        operand1: value === '.' || value === '-' ? `${operand1}${value}` : this.customRound(this.checkMinus(`${operand1}${value}`)),
+      });
     }
-    this.state.operand1 = this.checkMinus(value.slice(0, operatorPosition));
-
-    return this.state;
   }
 
-  getDotFlag() {
-    return this.state.dotFlag;
+  getState() {
+    return this.state;
   }
 
   checkError() {
@@ -68,47 +62,8 @@ export default class OperandsManager {
     return value;
   }
 
-  setOperands({
-    operand1,
-    operand2,
-    operator,
-  }) {
-    const checkDot = (operand) => {
-      if (!String(operand).split('').includes('.')) {
-        this.state.dotFlag = false;
-      } else {
-        this.state.dotFlag = true;
-      }
-    };
-
-    let curOperand1 = '';
-    let curOperand2 = '';
-    let curOperator = '';
-
-    if (operand1 || operand1 === 0) {
-      checkDot(operand1);
-      curOperand1 = this.customRound(operand1);
-      this.state.operand1 = curOperand1;
-    }
-    if (operand2) {
-      checkDot(operand2);
-      curOperand2 = this.customRound(operand2);
-      this.state.operand2 = curOperand2;
-    }
-
-    if (operator) {
-      curOperator = operator;
-      this.state.operator = curOperator;
-      this.state.actionFlag = true;
-    } else {
-      this.state.actionFlag = false;
-    }
-
-    return {
-      curOperand1,
-      curOperand2,
-      curOperator,
-    };
+  subscribe(listener) {
+    this.listeners.push(listener);
   }
 
   setState(value) {
@@ -116,5 +71,6 @@ export default class OperandsManager {
       ...this.state,
       ...value,
     };
+    this.listeners.forEach((listener) => listener.call(undefined, this.state));
   }
 }

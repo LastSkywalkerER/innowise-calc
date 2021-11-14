@@ -41,6 +41,26 @@ class CalculatorApp {
       // this.commandsManager.execute(button.name);
       return button;
     });
+
+    this.calculator.operandsManager.subscribe(({
+      operand1,
+      operand2,
+      operator,
+      errorOccured,
+    }) => {
+      if (errorOccured) {
+        this.drawer.setInputValue(`${errorOccured}`);
+        return;
+      }
+
+      if (operand2) {
+        this.drawer.setInputValue(`${operand1}${operator}${operand2}`);
+      } else if (operator) {
+        this.drawer.setInputValue(`${operand1}${operator}`);
+      } else {
+        this.drawer.setInputValue(`${operand1}`);
+      }
+    });
   }
 }
 

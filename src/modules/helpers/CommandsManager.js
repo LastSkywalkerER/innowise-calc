@@ -20,7 +20,7 @@ export default class CommandsManager {
       if (this.calculator.finalOperation) {
         this.calculator.reset();
       }
-      this.calculator.render(button.renderText);
+      this.calculator.renderOutput(button.renderText);
       return;
     }
 

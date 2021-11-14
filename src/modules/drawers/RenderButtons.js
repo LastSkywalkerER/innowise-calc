@@ -35,28 +35,26 @@ export default class RenderButtons extends CalculatorDrawer {
   }
 
   renderInput() {
-    const inputElement = document.createElement('div');
-    inputElement.classList.add('calculator-input');
-    inputElement.classList.add('text-field');
-    inputElement.innerHTML = `
-    <input
-      class="text-field__input"
-      type="text"
-      placeholder="Сalculator for sky calculations. Try me ;)"
-      disabled
-    />`;
-    return inputElement;
+    const inputWrapper = document.createElement('div');
+    inputWrapper.classList.add('calculator-input');
+    inputWrapper.classList.add('text-field');
+
+    this.input = document.createElement('input');
+    this.input.classList.add('text-field__input');
+    this.input.disabled = true;
+    this.input.type = 'text';
+    this.input.placeholder = 'Сalculator for sky calculations. Try me ;)';
+
+    inputWrapper.append(this.input);
+
+    return inputWrapper;
   }
 
   renderLayout(onClick) {
     this.buttonsWrapper = document.createElement('div');
     this.buttonsWrapper.classList.add('calculator-buttons');
 
-    const inputElement = this.renderInput();
-
-    [this.input] = inputElement.childNodes;
-
-    this.rootElement.append(inputElement);
+    this.rootElement.append(this.renderInput());
     this.rootElement.append(this.buttonsWrapper);
 
     this.buttonsWrapper.addEventListener('click', (event) => {
