@@ -6,7 +6,7 @@ export default class XFactCommand extends Command {
     if (this.operand1 < 0 || this.operand1 === Infinity) {
       throw Error('invalid operand');
     }
-    if (String(this.operand1).includes('.') && String(this.operand1).includes('e')) {
+    if ((String(this.operand1).includes('.') && String(this.operand1).includes('e')) || this.operand1 > 1000000) {
       throw Error('number is too big');
     }
     let factorial = 1;
