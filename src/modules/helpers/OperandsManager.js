@@ -17,11 +17,11 @@ export default class OperandsManager {
     } = this.getState();
     if (operator) {
       this.setState({
-        operand2: value === '.' ? `${operand2}${value}` : this.customRound(this.checkMinus(`${operand2}${value}`)),
+        operand2: value === '.' ? `${operand2}${value}` : this.checkMinus(`${operand2}${value}`),
       });
     } else {
       this.setState({
-        operand1: value === '.' || value === '-' ? `${operand1}${value}` : this.customRound(this.checkMinus(`${operand1}${value}`)),
+        operand1: value === '.' || value === '-' ? `${operand1}${value}` : this.checkMinus(`${operand1}${value}`),
       });
     }
   }
@@ -67,10 +67,19 @@ export default class OperandsManager {
   }
 
   setState(value) {
-    this.state = {
-      ...this.state,
-      ...value,
-    };
+    if (value.operand1) {
+      this.state = {
+        ...this.state,
+        ...value,
+        operand1: this.customRound(value.operand1),
+      };
+    } else {
+      this.state = {
+        ...this.state,
+        ...value,
+      };
+    }
+
     this.listeners.forEach((listener) => listener.call(undefined, this.state));
   }
 }

@@ -52,7 +52,7 @@ export default class СalcMath {
     }
 
     if (result.operand1 || result.operand1 === 0) {
-      this.operandsManager.setState({
+      this.checkOperands({
         operand1: result.operand1,
         operand2: result.operand2,
         operator: result.operator,
@@ -175,17 +175,18 @@ export default class СalcMath {
   }
 
   executer(Command, disableHistory) {
-    const state = this.operandsManager.getState(disableHistory);
+    const state = this.operandsManager.getState();
 
     const executedCommand = new Command(state);
     try {
       const output = executedCommand.execute();
       this.checkOperands(output);
-
-      this.commands.pushCommand({
-        executedCommand,
-        Command,
-      });
+      if (!disableHistory) {
+        this.commands.pushCommand({
+          executedCommand,
+          Command,
+        });
+      }
     } catch (e) {
       if (e.name === 'Error') {
         this.renderError(e);
@@ -211,6 +212,16 @@ export default class СalcMath {
 
   submit(repeatable) {
     if (this.CommandToExecute) {
+      const {
+        operand1,
+        operand2,
+        operator,
+      } = this.operandsManager.getState();
+      if (operator && !operand2) {
+        this.operandsManager.setState({
+          operand2: operand1,
+        });
+      }
       this.executer(this.CommandToExecute);
       this.CommandToExecute = null;
     } else if (repeatable && this.commands.getLastCommand()) {

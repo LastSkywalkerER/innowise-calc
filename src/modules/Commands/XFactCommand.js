@@ -6,8 +6,11 @@ export default class XFactCommand extends Command {
     if (this.operand1 < 0 || this.operand1 === Infinity) {
       throw Error('invalid operand');
     }
+    if (String(this.operand1).includes('.') && String(this.operand1).includes('e')) {
+      throw Error('number is too big');
+    }
     let factorial = 1;
-    if (!String(this.operand1).split('').includes('.')) {
+    if (!String(this.operand1).includes('.')) {
       for (let i = 1; i <= this.operand1; i++) {
         factorial *= i;
       }

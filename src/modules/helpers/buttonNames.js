@@ -22,7 +22,7 @@ import MRCommand from '../Commands/MRCommand';
 const buttonNames = {
   getButtonByOperator(operator) {
     return this[Object.keys(this).reduce((prev, curr) => {
-      if (this[curr].buttonText === operator) {
+      if (this[curr].renderText === operator) {
         return curr;
       }
       return prev;
