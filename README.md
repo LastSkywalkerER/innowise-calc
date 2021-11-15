@@ -18,34 +18,34 @@
 
 <h1 align="center">How to use</h1>
 
-|                                        Button                                        | Function                            |
-| :----------------------------------------------------------------------------------: | ----------------------------------- |
-| <img src="./readme_assets/theme-changer.png" style="flex-basis: 20%;" width="100px"> | Theme changer                       |
-|    <img src="./readme_assets/numbers.png" style="flex-basis: 20%;" width="150px">    | Buttons for input numbers           |
-|      <img src="./readme_assets/dev.png" style="flex-basis: 20%;" width="100px">      | Devision button                     |
-|     <img src="./readme_assets/mult.png" style="flex-basis: 20%;" width="100px">      | Multiply button                     |
-|     <img src="./readme_assets/minus.png" style="flex-basis: 20%;" width="100px">     | Minus button                        |
-|     <img src="./readme_assets/plus.png" style="flex-basis: 20%;" width="100px">      | Plus button                         |
-|     <img src="./readme_assets/equal.png" style="flex-basis: 20%;" width="100px">     | Equal button, repeat last operation |
-|     <img src="./readme_assets/reset.png" style="flex-basis: 20%;" width="100px">     | Reset button                        |
-|  <img src="./readme_assets/plus-minus.png" style="flex-basis: 20%;" width="100px">   | Plus/minus button                   |
-|    <img src="./readme_assets/percent.png" style="flex-basis: 20%;" width="100px">    | Devision second number by 100       |
-|      <img src="./readme_assets/mc.png" style="flex-basis: 20%;" width="100px">       | Memory clear                        |
-|    <img src="./readme_assets/m-plus.png" style="flex-basis: 20%;" width="100px">     | Add to memory                       |
-|    <img src="./readme_assets/m-minus.png" style="flex-basis: 20%;" width="100px">    | Subtract from the memory            |
-|      <img src="./readme_assets/mr.png" style="flex-basis: 20%;" width="100px">       | Write memory number                 |
-|   <img src="./readme_assets/x-square.png" style="flex-basis: 20%;" width="100px">    | Square                              |
-|    <img src="./readme_assets/x-cube.png" style="flex-basis: 20%;" width="100px">     | Cube                                |
-|    <img src="./readme_assets/x-in-y.png" style="flex-basis: 20%;" width="100px">     | Power                               |
-|    <img src="./readme_assets/e-in-x.png" style="flex-basis: 20%;" width="100px">     | e power                             |
-|   <img src="./readme_assets/ten-in-x.png" style="flex-basis: 20%;" width="100px">    | ten power                           |
-|    <img src="./readme_assets/1-dev-x.png" style="flex-basis: 20%;" width="100px">    | Devide 1                            |
-|  <img src="./readme_assets/square-root.png" style="flex-basis: 20%;" width="100px">  | Square root                         |
-|   <img src="./readme_assets/cube-root.png" style="flex-basis: 20%;" width="100px">   | Cube root                           |
-|    <img src="./readme_assets/y-root.png" style="flex-basis: 20%;" width="100px">     | Root                                |
-|    <img src="./readme_assets/x-fact.png" style="flex-basis: 20%;" width="100px">     | Factorial                           |
-|     <img src="./readme_assets/back.png" style="flex-basis: 20%;" width="100px">      | Previous operation                  |
-|                                                                                      |                                     |
+|                                        Button                                        | Function                                                |
+| :----------------------------------------------------------------------------------: | ------------------------------------------------------- |
+| <img src="./readme_assets/theme-changer.png" style="flex-basis: 20%;" width="100px"> | Theme changer                                           |
+|    <img src="./readme_assets/numbers.png" style="flex-basis: 20%;" width="150px">    | Buttons for input numbers, work with keyboard           |
+|      <img src="./readme_assets/dev.png" style="flex-basis: 20%;" width="100px">      | Devision button, work with keyboard                     |
+|     <img src="./readme_assets/mult.png" style="flex-basis: 20%;" width="100px">      | Multiply button, work with keyboard                     |
+|     <img src="./readme_assets/minus.png" style="flex-basis: 20%;" width="100px">     | Minus button, work with keyboard                        |
+|     <img src="./readme_assets/plus.png" style="flex-basis: 20%;" width="100px">      | Plus button, work with keyboard                         |
+|     <img src="./readme_assets/equal.png" style="flex-basis: 20%;" width="100px">     | Equal button, repeat last operation, work with keyboard |
+|     <img src="./readme_assets/reset.png" style="flex-basis: 20%;" width="100px">     | Reset button, work with keyboard                        |
+|  <img src="./readme_assets/plus-minus.png" style="flex-basis: 20%;" width="100px">   | Plus/minus button                                       |
+|    <img src="./readme_assets/percent.png" style="flex-basis: 20%;" width="100px">    | Devision second number by 100                           |
+|      <img src="./readme_assets/mc.png" style="flex-basis: 20%;" width="100px">       | Memory clear                                            |
+|    <img src="./readme_assets/m-plus.png" style="flex-basis: 20%;" width="100px">     | Add to memory                                           |
+|    <img src="./readme_assets/m-minus.png" style="flex-basis: 20%;" width="100px">    | Subtract from the memory                                |
+|      <img src="./readme_assets/mr.png" style="flex-basis: 20%;" width="100px">       | Write memory number                                     |
+|   <img src="./readme_assets/x-square.png" style="flex-basis: 20%;" width="100px">    | Square                                                  |
+|    <img src="./readme_assets/x-cube.png" style="flex-basis: 20%;" width="100px">     | Cube                                                    |
+|    <img src="./readme_assets/x-in-y.png" style="flex-basis: 20%;" width="100px">     | Power                                                   |
+|    <img src="./readme_assets/e-in-x.png" style="flex-basis: 20%;" width="100px">     | e power                                                 |
+|   <img src="./readme_assets/ten-in-x.png" style="flex-basis: 20%;" width="100px">    | ten power                                               |
+|    <img src="./readme_assets/1-dev-x.png" style="flex-basis: 20%;" width="100px">    | Devide 1                                                |
+|  <img src="./readme_assets/square-root.png" style="flex-basis: 20%;" width="100px">  | Square root                                             |
+|   <img src="./readme_assets/cube-root.png" style="flex-basis: 20%;" width="100px">   | Cube root                                               |
+|    <img src="./readme_assets/y-root.png" style="flex-basis: 20%;" width="100px">     | Root                                                    |
+|    <img src="./readme_assets/x-fact.png" style="flex-basis: 20%;" width="100px">     | Factorial                                               |
+|     <img src="./readme_assets/back.png" style="flex-basis: 20%;" width="100px">      | Previous operation                                      |
+|                                                                                      |                                                         |
 
 <h1 align="center">How to run</h1>
 
@@ -66,6 +66,24 @@
     - modules / project modules
       - Commands / calculator commands
       - Commands.tests / tests of main functions
+      - drawers / classes responsible for rendering
+      - helpers / supporting modules
+
+<h1 align="center">Naming</h1>
+
+Files with a capital letter contains the class:
+
+```
+CalcMath.js
+```
+
+Files with a small letter contain functions, variables, etc.
+
+```
+buttonNames.js
+```
+
+Files with functions and classes at the same time divided into files with the appropriate name.
 
 <h1 align="center">About test</h1>
 
