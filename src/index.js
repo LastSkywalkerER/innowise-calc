@@ -1,77 +1,72 @@
-import changeTheme from './modules/changeTheme';
-import renderButtons from './modules/renderButtons';
-import Command from './modules/Commands/ButtonsCommand';
+import ChangeTheme from './modules/ChangeTheme';
+import lightTheme from './modules/helpers/lightTheme';
+import darkTheme from './modules/helpers/darkTheme';
+import RenderButtons from './modules/drawers/RenderButtons';
+import CommandsManager from './modules/helpers/CommandsManager';
 import СalcMath from './modules/CalcMath';
+import CommandsContainer from './modules/helpers/CommandsContainer';
 import {
+  buttonsHard,
+  buttonsSimpleUp,
+  buttonsSimpleRight,
+  buttonsNumbers,
   buttonNames,
-} from './modules/buttonNames';
+} from './modules/helpers/buttonNames';
 
 import './style.sass';
 import './checkbox.sass';
 
-const calculator = document.getElementById('calculator');
-const input = calculator.querySelector('.text-field__input');
-const buttons = calculator.querySelector('.calculator-buttons');
-const buttonsHardBlock = buttons.querySelector('.calculator-buttons_hard');
-const buttonsSimpleUpBlock = buttons.querySelector('.simple--up');
-const buttonsSimpleRightBlock = buttons.querySelector('.simple--right');
-const buttonsNumbersBlock = buttons.querySelector('.numbers');
-
-const command = new Command(new СalcMath(input), buttonNames);
-
-changeTheme();
-
-renderButtons(
-  buttonsHardBlock,
-  buttonsSimpleUpBlock,
-  buttonsSimpleRightBlock,
-  buttonsNumbersBlock,
-);
-
-buttons.addEventListener('click', (event) => {
-  if (event.target.hasAttribute('calcAct')) {
-    command.execute(event.target.getAttribute('calcAct'));
+class CalculatorApp {
+  constructor() {
+    this.drawer = new RenderButtons(document.getElementById('calculator'));
+    this.calculator = new СalcMath();
+    this.container = new CommandsContainer();
+    this.commandsManager = new CommandsManager(this.calculator);
+    this.changeTheme = new ChangeTheme(document.querySelector('.theme-toggler input[type=checkbox]'));
   }
-});
 
-document.addEventListener('keydown', (event) => {
-  event.preventDefault();
-  // eslint-disable-next-line prefer-destructuring
-  let key = event.key;
-  switch (key) {
-    case 'Delete':
-      key = 'AC';
-      break;
-    case 'Backspace':
-      key = 'AC';
-      break;
-    case 'Enter':
-      key = '=';
-      break;
-    case ',':
-      key = '.';
-      break;
-    default:
-      break;
-  }
-  try {
-    command.execute(key);
-    const button = buttons.querySelector(`[calcAct="${key}"]`);
-    button.classList.add('clicked-button');
-    setTimeout(() => {
-      button.classList.remove('clicked-button');
-    }, 300);
-    // eslint-disable-next-line no-empty
-  } catch (e) {
+  start() {
+    this.changeTheme.addTheme('dark', darkTheme);
+    this.changeTheme.addTheme('light', lightTheme);
+    this.changeTheme.start();
 
-  }
-});
+    this.drawer.renderLayout((event) => {
+      if (event.target.hasAttribute('calcAct')) {
+        this.commandsManager.execute(event.target.getAttribute('calcAct'));
+      }
+    });
 
-buttons.addEventListener('mousedown', (event) => {
-  if (event.target.hasAttribute('calcAct')) {
-    event.target.classList.add('clicked-button');
-    setTimeout(() => {
-      event.target.classList.remove('clicked-button');
-    }, 300);
+    this.drawer.appendButtons(buttonsHard, 'calculator-buttons_hard');
+    this.drawer.appendButtons(buttonsSimpleUp, 'calculator-buttons_simple numbers-block simple--up');
+    this.drawer.appendButtons(buttonsNumbers, 'calculator-buttons_simple numbers-block numbers');
+    this.drawer.appendButtons(buttonsSimpleRight, 'calculator-buttons_simple simple--right');
+
+    this.drawer.bindKeyboard((key) => {
+      const button = buttonNames.getButtonByOperator(key);
+      this.commandsManager.execute(button.name);
+      return button;
+    });
+
+    this.calculator.operandsManager.subscribe(({
+      operand1,
+      operand2,
+      operator,
+      errorOccured,
+    }) => {
+      if (errorOccured) {
+        this.drawer.setInputValue(`${errorOccured}`);
+        return;
+      }
+
+      if (operand2) {
+        this.drawer.setInputValue(`${operand1}${operator}${operand2}`);
+      } else if (operator) {
+        this.drawer.setInputValue(`${operand1}${operator}`);
+      } else {
+        this.drawer.setInputValue(`${operand1}`);
+      }
+    });
   }
-});
+}
+
+new CalculatorApp().start();

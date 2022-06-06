@@ -1,7 +1,10 @@
 import Command from './Command';
 
 export default class MCCommand extends Command {
+  // eslint-disable-next-line class-methods-use-this
   execute() {
-    this.subject.memory = 0;
+    return {
+      memory: 0,
+    };
   }
 }

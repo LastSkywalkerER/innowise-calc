@@ -2,13 +2,16 @@ import Command from './Command';
 
 export default class MultCommand extends Command {
   execute() {
-    this.operand1 = this.subject.operand1;
-    this.operand2 = this.subject.operand2;
-    this.operator = this.subject.operator;
-    this.subject.renderAnswer(this.subject.operand1 * this.subject.operand2);
+    return {
+      operand1: this.operand1 * this.operand2,
+    };
   }
 
   unDo() {
-    this.subject.setOperands(this.operand1, this.operand2, this.operator);
+    return {
+      operand1: this.operand1,
+      operand2: this.operand2,
+      operator: this.operator,
+    };
   }
 }

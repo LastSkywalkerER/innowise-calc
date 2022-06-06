@@ -1,193 +1,231 @@
+import {
+  buttonNames,
+} from './helpers/buttonNames';
+import OperandsManager from './helpers/OperandsManager';
+import CommandsContainer from './helpers/CommandsContainer';
+
+const initialState = {
+  operator: '',
+  operand1: '',
+  operand2: '',
+  errorOccured: undefined,
+};
+
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 export default class СalcMath {
-  constructor(input) {
-    this.operator = '';
-    this.commands = [];
-    this.CommandToExecute = null;
-    this.LastCommand = null;
-    this.lastExecutedCommand = null;
-    this.UsedCommands = new Map();
-    this.operand1 = 0;
-    this.operand2 = 0;
-    this.input = input;
+  constructor() {
+    this.operandsManager = new OperandsManager(initialState);
+    this.commands = new CommandsContainer();
     this.dotFlag = false;
-    this.actionFlag = false;
-    this.minusBeforeOperand2 = false;
-    this.errorOccured = false;
-    this.finalOperation = false;
     this.memory = 0;
+    this.CommandToExecute = null;
+    this.finalOperation = false;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  checkMinus(string) {
-    return (string.slice(0, 1) !== '-' ? +string : -string.slice(1, string.length));
-  }
-
-  getOperands() {
-    const value = String(this.input.value);
-    let operatorPosition = value.slice(0, 1) !== '-' ?
-      value.indexOf(this.operator) :
-      (value.slice(1, value.length).indexOf(this.operator) + 1);
-
-    if (this.operator && operatorPosition > 0) {
-      this.operand2 = this.checkMinus(value.slice(operatorPosition + this.operator.length));
-    } else {
-      operatorPosition = value.length;
-    }
-    this.operand1 = this.checkMinus(value.slice(0, operatorPosition));
-  }
-
-  setOperands(setValue1 = '', setValue2 = '', operator) {
+  setMemory(button) {
     this.errorReset();
+    this.submit();
+    const {
+      operand1,
+      operand2,
+      operator,
+    } = this.operandsManager.getState();
 
-    let curOperator = operator;
-    if (!Number.isNaN(setValue1)) {
-      this.operand1 = this.customRound(setValue1);
+    const command = new button.Command({
+      operand1,
+      operand2,
+      operator,
+      memory: this.memory,
+    });
+    let result = {};
+
+    try {
+      result = command.execute(operand1);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
     }
-    if (!Number.isNaN(setValue2)) {
-      this.operand2 = this.customRound(setValue2);
+
+    if (result.memory || result.memory === 0) {
+      this.memory = result.memory;
     }
 
-    if (operator) {
-      curOperator = operator;
-      this.actionFlag = true;
-    } else {
-      curOperator = '';
+    if (result.operand1 || result.operand1 === 0) {
+      this.checkOperands({
+        operand1: result.operand1,
+        operand2: result.operand2,
+        operator: result.operator,
+      });
     }
-    this.operator = curOperator;
-
-    this.input.value = `${this.operand1}${curOperator}${this.operand2}`;
-  }
-
-  setMemory(value) {
-    this.memory += value;
   }
 
   renderError(e) {
-    this.errorOccured = true;
     this.reset();
-    this.input.value = e;
+    this.operandsManager.setState({
+      errorOccured: e,
+    });
   }
 
   errorReset() {
-    if (this.errorOccured) {
-      this.errorOccured = false;
+    if (this.operandsManager.checkError()) {
+      this.operandsManager.setState({
+        errorOccured: false,
+      });
       this.reset();
     }
   }
 
-  render(value) {
+  renderOutput(value) {
     this.errorReset();
     this.finalOperation = false;
-    if (this.input.value === 'Infinity') {
+
+    const {
+      operand1,
+    } = this.operandsManager.getState();
+
+    if (operand1 === Infinity) {
       this.reset();
     }
-    this.input.value += value;
+    if (value === buttonNames.dot.renderText) {
+      if (!this.dotFlag) {
+        this.dotFlag = true;
+        this.operandsManager.composeOutput(value);
+      }
+    } else {
+      this.operandsManager.composeOutput(value);
+    }
   }
 
-  renderAction(value, Command) {
-    this.errorReset();
-
-    const initialSequence = () => {
-      if (this.input.value !== '' && this.input.value !== '-' && this.input.value !== 'Infinity') {
+  checkOperands({
+    operand1,
+    operand2,
+    operator,
+  }) {
+    const checkDot = (operand) => {
+      if (!String(operand).split('').includes('.')) {
         this.dotFlag = false;
-        this.LastCommand = Command;
-        this.CommandToExecute = Command;
-        this.UsedCommands.set(value, Command);
-        this.operator = value;
-        this.actionFlag = true;
-        this.render(value);
-      } else if (value === '-' && this.input.value === '') {
-        this.render(value);
+      } else {
+        this.dotFlag = true;
       }
     };
 
-    if (this.input.value.indexOf(this.operator) === (this.input.value.length - 1) &&
-      this.actionFlag) {
-      // добавляет минус у второго операнда после оператора О_о
-      // if (!this.minusBeforeOperand2 && value === '-') {
-      //   this.minusBeforeOperand2 = true;
-      //   this.render(value);
-      //   return;
-      // }
-      this.minusBeforeOperand2 = false;
-      this.getOperands();
-      this.input.value = this.operand1;
-      initialSequence();
-      return;
+    if (operator) {
+      this.CommandToExecute = buttonNames.getButtonByOperator(operator).Command;
     }
 
-    if (this.actionFlag) {
+    if (operand1 || operand1 === 0) {
+      checkDot(operand1);
+    }
+    if (operand2) {
+      checkDot(operand2);
+    }
+
+    this.operandsManager.setState({
+      operand1: operand1 || 0,
+      operand2: operand2 || 0,
+      operator: operator || '',
+    });
+  }
+
+  renderAction(button) {
+    this.errorReset();
+    this.finalOperation = false;
+    const {
+      operand1,
+      operand2,
+      operator,
+    } = this.operandsManager.getState();
+
+    const initialSequence = () => {
+      if (operand1 !== '' && operand1 !== '-' && operand1 !== Infinity) {
+        this.CommandToExecute = button.Command;
+        this.operandsManager.setState({
+          operator: button.renderText,
+        });
+        this.dotFlag = false;
+      } else if (button.renderText === '-' && !operand1) {
+        this.renderOutput(button.renderText);
+      }
+    };
+
+    if (operand2 && operator) {
       this.submit();
       initialSequence();
       return;
     }
 
-    if (!this.actionFlag) {
+    if (!operator || (!operand2 && operator)) {
       initialSequence();
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  customRound(value) {
-    if (String(value).indexOf('.') > 0) {
-      return this.checkMinus(value
-        .toPrecision(15));
-    }
-    return value;
-  }
-
-  renderAnswer(value) {
-    this.errorReset();
-    const roundedValue = this.customRound(value);
-
-    // this.operator = '';
-    this.operand1 = roundedValue;
-    if (!String(this.operand1).split('').includes('.')) {
-      this.dotFlag = false;
-    } else {
-      this.dotFlag = true;
-    }
-    this.actionFlag = false;
-    this.input.value = roundedValue;
-  }
-
   reset() {
-    this.operator = '';
-    this.operand1 = 0;
-    this.operand2 = 0;
+    this.operandsManager.setState(initialState);
     this.dotFlag = false;
-    this.minusBeforeOperand2 = false;
-    this.actionFlag = false;
     this.finalOperation = false;
-    this.input.value = '';
-    this.LastCommand = null;
+    this.CommandToExecute = null;
   }
 
   unDo() {
-    if (this.commands.length) {
+    if (this.commands.getLastCommand()) {
       this.finalOperation = true;
-      this.lastExecutedCommand = this.commands.pop();
-      this.lastExecutedCommand.unDo();
+      this.checkOperands(this.commands.popCommand().executedCommand.unDo());
     }
   }
 
-  submit() {
-    this.getOperands();
-    if (this.lastExecutedCommand) {
-      this.lastExecutedCommand.execute();
-      this.commands.push(this.lastExecutedCommand);
-      this.lastExecutedCommand = null;
-      this.LastCommand = this.UsedCommands.get(this.operator);
-    } else if (this.finalOperation && this.LastCommand) {
-      const command = new this.LastCommand(this);
-      command.execute();
-      this.commands.push(command);
-    } else if (this.operator) {
-      const command = new this.CommandToExecute(this);
-      command.execute();
-      this.commands.push(command);
+  executer(Command, disableHistory) {
+    const state = this.operandsManager.getState();
+
+    const executedCommand = new Command(state);
+    try {
+      const output = executedCommand.execute();
+      this.checkOperands(output);
+      if (!disableHistory) {
+        this.commands.pushCommand({
+          executedCommand,
+          Command,
+        });
+      }
+    } catch (e) {
+      if (e.name === 'Error') {
+        this.renderError(e);
+        // console.error(e);
+      } else {
+        // eslint-disable-next-line no-console
+        console.error(e);
+      }
+    }
+  }
+
+  setLastOperands() {
+    const {
+      operand2,
+      operator,
+    } = this.commands.getLastCommand().executedCommand;
+    this.operandsManager.setState({
+      operand2,
+      operator,
+    });
+    return this.commands.getLastCommand().Command;
+  }
+
+  submit(repeatable) {
+    if (this.CommandToExecute) {
+      const {
+        operand1,
+        operand2,
+        operator,
+      } = this.operandsManager.getState();
+      if (operator && !operand2) {
+        this.operandsManager.setState({
+          operand2: operand1,
+        });
+      }
+      this.executer(this.CommandToExecute);
+      this.CommandToExecute = null;
+    } else if (repeatable && this.commands.getLastCommand()) {
+      this.executer(this.setLastOperands());
     }
   }
 }
